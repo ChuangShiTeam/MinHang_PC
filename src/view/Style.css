@@ -1,9 +1,10 @@
-*{
-    padding:0px;
-    margin:0px;
-    list-style:none;
-    text-decoration:none;
+* {
+    padding: 0px;
+    margin: 0px;
+    list-style: none;
+    text-decoration: none;
 }
+
 /*index-00*/
 .index-00-bg {
     width: 1920px;
@@ -14,80 +15,84 @@
     background-size: 100% 100%;
 }
 
-.bottom-position{
+.index-00-carousel {
     position: absolute;
-    bottom: 34px;
-    left:0px;
-    right:0px;
-}
-.bottom-carousel{
-    width:1196px;
-    position: relative;
+    width: 1170px;
     left: 214px;
-    top: 88px;
-}
-.bottom-li{
-    box-sizing: border-box;
-    height: 196px;
-}
-.bottom-li img{
-    width: 272px;
-}
-.button_previous{
-    position: relative;
-    left: 136px;
-    bottom: 80px;
-    border:none;
-}
-.button_next{
-    position: relative;
-    left: 1336px;
-    bottom: 80px;
-    border:none;
+    top: 850px;
+    overflow: hidden;
 }
 
-.side{
+.index-00-carousel-item {
+}
+
+.index-00-carousel-item img {
+    width: 270px;
+}
+
+.index-00-carousel-previous {
     position: absolute;
-    top:93px;
-    right:93px;
+    left: 120px;
+    top: 870px;
+    border: none;
+}
+
+.index-00-carousel-next {
+    position: relative;
+    left: 1385px;
+    top: 870px;
+    border: none;
+}
+
+.side {
+    position: absolute;
+    top: 93px;
+    right: 93px;
     width: 224px;
 }
-.public_signal{
+
+.public_signal {
     width: 224px;
     height: 224px;
     margin-bottom: 80px;
 }
-.public_signal img{
+
+.public_signal img {
     width: 224px;
     height: 224px;
 }
-.public_signal p{
+
+.public_signal p {
     color: #6d6d6d;
     text-align: center;
     font-size: 14px;
 }
-.side .member{
+
+.side .member {
     margin-top: 60px;
     color: #6d6d6d;
     margin-left: 10px;
 }
-.side .member p{
+
+.side .member p {
     margin-bottom: 20px;
-    padding-left:22px;
+    padding-left: 22px;
 }
-.side .member li{
-    margin:12px 0px;
+
+.side .member li {
+    margin: 12px 0px;
     word-wrap: normal;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
-.uner_img img{
-    width:84px;
-    height:84px;
+
+.member-image {
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
-    vertical-align:middle;
-    margin-right:22px;
+    vertical-align: middle;
+    margin-right: 22px;
 }
 
 /*index-01*/
@@ -99,23 +104,26 @@
     background: url('../image/index_01_bg.png') no-repeat center;
     background-size: 100% 100%;
 }
-.con_but{
+
+.con_but {
 }
-.con_but_01{
+
+.con_but_01 {
     position: absolute;
-    top:982px;
+    top: 982px;
     left: 354px;
-    cursor:pointer;
+    cursor: pointer;
 }
-.con_but_02{
+
+.con_but_02 {
     position: absolute;
-    top:1227px;
+    top: 1227px;
     left: 354px;
-    cursor:pointer;
- }
+    cursor: pointer;
+}
 
 /*index-02*/
-.index-02-bg{
+.index-02-bg {
     width: 2048px;
     height: 1536px;
     margin: 0 auto;
@@ -124,47 +132,55 @@
     background-size: cover;
     position: relative;
 }
-.index-02-main{
+
+.index-02-main {
     position: absolute;
-    top:422px;
-    left:106px;
+    top: 422px;
+    left: 50%;
+    margin-left: -749px;
     background: #ffffff;
     width: 1498px;
-    height:1042px;
+    height: 1042px;
     border-radius: 20px;
-    padding-top:96px;
+    padding-top: 96px;
     box-sizing: border-box;
 }
-.index-02-title{
+
+.index-02-title {
     font-size: 33.3px;
     text-align: center;
     margin-bottom: 96px;
     box-sizing: border-box;
 }
-.video-li{
-    width:100%;
+
+.video-li {
+    width: 100%;
     box-sizing: border-box;
 }
-.video-li li{
+
+.video-li li {
     width: 20%;
     float: left;
-    padding:0px 35px;
+    padding: 0px 35px;
     box-sizing: border-box;
     margin-bottom: 48px;
 }
-.video-li li img{
+
+.video-li li img {
     width: 100%;
 }
-.index-02-main-text{
+
+.index-02-main-text {
     fonot-size: 16.6px;
     color: #000;
-    text-decoration:none;
+    text-decoration: none;
     word-wrap: normal;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
 }
-.index-02-page{
+
+.index-02-page {
     margin: 0 auto;
     left: 380px;
     bottom: 55px;
