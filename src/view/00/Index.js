@@ -3,6 +3,7 @@ import {connect} from 'dva';
 import {routerRedux} from 'dva/router';
 import {Modal} from 'antd';
 import Slider from 'react-slick';
+import notification from '../../util/notification';
 
 class Index extends Component {
     constructor(props) {
@@ -14,13 +15,16 @@ class Index extends Component {
     }
 
     componentDidMount() {
-        window.socket.on('event', function (data) {
-
+        notification.on('event', this, function (data) {
+            this.setState({
+                is_show: true,
+                action: 'save'
+            });
         });
     }
 
     componentWillUnmount() {
-        window.socket.removeAllListeners(['event']);
+        notification.remove('event', this);
     }
 
     handleNext() {
