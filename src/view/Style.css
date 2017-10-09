@@ -191,3 +191,64 @@
     bottom: 55px;
     position: absolute;
 }
+
+.index-3-bg {
+    width: 2560px;
+    height: 1600px;
+    margin: 0 auto;
+    position: relative;
+    background: url('../image/index_3_bg.jpg') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.index-3-button {
+    position: absolute;
+    top: 1199px;
+    left: 923px;
+    width: 339px;
+    height: 109px;
+    cursor: pointer;
+}
+
+.index-4-bg {
+    width: 7680px;
+    height: 1080px;
+    margin: 0 auto;
+    position: relative;
+    background: url('../image/index_4_bg.jpg') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.index-4-carousel {
+    position: absolute;
+    left: 1320px;
+    top: 160px;
+    width: 6115px;
+    height: 814px;
+}
+
+.index-4-carousel-item {
+
+}
+
+.index-4-previous {
+    position: absolute;
+    left: 1171px;
+    top: 486px;
+    width: 107px;
+    height: 179px;
+    border: none;
+    background: url('../image/index_4_pre.png') no-repeat center;
+    cursor: pointer;
+}
+
+.index-4-next {
+    position: relative;
+    left: 7458px;
+    top: 486px;
+    width: 107px;
+    height: 179px;
+    border: none;
+    background: url('../image/index_4_next.png') no-repeat center;
+    cursor: pointer;
+}
