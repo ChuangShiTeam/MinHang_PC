@@ -2,11 +2,8 @@ import React, {Component} from 'react';
 import {Pagination} from 'antd';
 import {connect} from 'dva';
 import {Modal} from 'antd';
+import {Player, ControlBar} from 'video-react';
 
-//点击分页按钮函数
-function onChange(pageNumber) {
-    console.log('Page: ', pageNumber);
-}
 class Index extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +39,10 @@ class Index extends Component {
         });
     }
 
+    handleChange(page) {
+
+    }
+
     render() {
         return (
             <div className="index-5-bg">
@@ -70,7 +71,7 @@ class Index extends Component {
                         </li>
                     </ul>
                     <div className="index-5-page">
-                        <Pagination showQuickJumper defaultCurrent={2} total={500} onChange={onChange}/>
+                        <Pagination  defaultCurrent={2} total={500} onChange={this.handleChange.bind(this)}/>
                     </div>
                 </div>
                 <Modal
@@ -81,9 +82,13 @@ class Index extends Component {
                     onCancel={this.handleCancel.bind(this)}
                 >
                     <div className="modal-main">
-                        <p>Some contents...</p>
-                        <p>Some contents...</p>
-                        <p>Some contents...</p>
+                        <div>
+                            <Player ref="player" playsInline={true}>
+                                <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                                <ControlBar autoHide={true} disableDefaultControls={true}>
+                                </ControlBar>
+                            </Player>
+                        </div>
                     </div>
                 </Modal>
             </div>
