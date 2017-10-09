@@ -100,35 +100,8 @@
     margin-right: 22px;
 }
 
-/*index-1*/
-.index-1-bg {
-    width: 1080px;
-    height: 1774px;
-    margin: 0 auto;
-    position: relative;
-    background: url('../image/index_01_bg.png') no-repeat center;
-    background-size: 100% 100%;
-}
-
-.con_but {
-}
-
-.con_but_01 {
-    position: absolute;
-    top: 982px;
-    left: 354px;
-    cursor: pointer;
-}
-
-.con_but_02 {
-    position: absolute;
-    top: 1227px;
-    left: 354px;
-    cursor: pointer;
-}
-
-/*index-2*/
-.index-2-bg {
+/*index-5*/
+.index-5-bg {
     width: 2048px;
     height: 1536px;
     margin: 0 auto;
@@ -138,7 +111,7 @@
     position: relative;
 }
 
-.index-2-main {
+.index-5-main {
     position: absolute;
     top: 422px;
     left: 50%;
@@ -151,7 +124,7 @@
     box-sizing: border-box;
 }
 
-.index-2-title {
+.index-5-title {
     font-size: 33.3px;
     text-align: center;
     margin-bottom: 96px;
@@ -175,7 +148,7 @@
     width: 100%;
 }
 
-.index-2-main-text {
+.index-5-main-text {
     fonot-size: 16.6px;
     color: #000;
     text-decoration: none;
@@ -185,7 +158,7 @@
     overflow: hidden;
 }
 
-.index-2-page {
+.index-5-page {
     margin: 0 auto;
     left: 380px;
     bottom: 55px;
@@ -250,5 +223,32 @@
     height: 179px;
     border: none;
     background: url('../image/index_4_next.png') no-repeat center;
+    cursor: pointer;
+}
+
+/*index-2*/
+.index-2-bg {
+    width: 1080px;
+    height: 1774px;
+    margin: 0 auto;
+    position: relative;
+    background: url('../image/index_01_bg.png') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.con_but {
+}
+
+.con_but_01 {
+    position: absolute;
+    top: 982px;
+    left: 354px;
+    cursor: pointer;
+}
+
+.con_but_02 {
+    position: absolute;
+    top: 1227px;
+    left: 354px;
     cursor: pointer;
 }
