@@ -3,13 +3,18 @@ import {connect} from 'dva';
 import {Modal} from 'antd';
 import Slider from 'react-slick';
 import notification from '../../util/notification';
+import http from '../../util/http';
+import constant from '../../util/constant';
+import validate from '../../util/validate';
 
 class Index extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            visible: false
+            visible: false,
+            poster: {},
+            poster_list: []
         }
     }
 
@@ -20,10 +25,26 @@ class Index extends Component {
                 action: 'save'
             });
         });
+        this.handleLoadPoster();
     }
 
     componentWillUnmount() {
         notification.remove('event', this);
+    }
+
+    handleLoadPoster() {
+        http.request({
+            url: '/mobile/minhang/poster/list',
+            data: {},
+            success: function (data) {
+                this.setState({
+                    poster_list: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }
+        });
     }
 
     handleNext() {
@@ -33,25 +54,29 @@ class Index extends Component {
         this.slider.slickPrev();
     }
 
-    handleClick() {
+    handleClick(poster) {
         this.setState({
+            poster: poster,
             visible: true
         });
     }
 
     handleOk() {
         this.setState({
+            poster: {},
             visible: false
         });
     }
 
     handleCancel() {
         this.setState({
+            poster: {},
             visible: false
         });
     }
 
     render() {
+        console.log('this.state.poster_list', this.state.poster_list);
         return (
             <div className="index-0-bg">
                 <div className="index-0-carousel">
@@ -62,10 +87,16 @@ class Index extends Component {
                         slidesToScroll: 1,
                         arrows: false
                     }}>
-                        <div className="index-0-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_00_but01.png')} alt=""/></div>
-                        <div className="index-0-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_00_but01.png')} alt="" /></div>
-                        <div className="index-0-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_00_but01.png')}  alt=""/></div>
-                        <div className="index-0-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_00_but01.png')}  alt=""/></div>
+                        {
+                            this.state.poster_list.map((poster, index) => {
+                                return (
+                                    <div key={index} className="index-0-carousel-item" onClick={this.handleClick.bind(this, poster)}>
+                                        <img src={constant.host + poster.poster_image_file.file_original_path} alt=""/>
+                                    </div>
+                                )
+
+                            })
+                        }
                     </Slider>
 
                 </div>
@@ -114,16 +145,13 @@ class Index extends Component {
                     </div>
                 </div>
                 <Modal
-                    title="Basic Modal"
+                    title={this.state.poster.poster_title?this.state.poster.poster_title:null}
                     width = {1000}
                     visible={this.state.visible}
                     onOk={this.handleOk.bind(this)}
                     onCancel={this.handleCancel.bind(this)}
                 >
-                    <div className="modal-main">
-                        <p>Some contents...</p>
-                        <p>Some contents...</p>
-                        <p>Some contents...</p>
+                    <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.poster.poster_content?validate.unescapeHtml(this.state.poster.poster_content):null}}>
                     </div>
                 </Modal>
             </div>
