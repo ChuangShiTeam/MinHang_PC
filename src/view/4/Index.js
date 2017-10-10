@@ -73,11 +73,12 @@ class Index extends Component {
                                     this.state.timeline_list.map((timeline, index) => {
                                         return (
                                             <div key={index} className="index-4-carousel-item" onClick={this.handleClick.bind(this, timeline.timeline_id)}>
-                                                <img src={constant.host + timeline.timeline_image_file.file_path} alt=""/>
+                                                <img src={constant.host + timeline.timeline_image_file.file_path} height="813.98" width="750" alt=""/>
                                             </div>
                                         )
                                     })
                                 }
+
                             </Slider>:null
                     }
                 </div>
