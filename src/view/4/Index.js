@@ -2,24 +2,42 @@ import React, {Component } from 'react';
 import {connect} from 'dva';
 import Slider from 'react-slick';
 
+import constant from '../../util/constant';
+import http from '../../util/http';
+
 class Index extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-
+            timeline_list: []
         }
     }
 
     componentDidMount() {
-        
+        this.handleLoadTimeline();
     }
 
     componentWillUnmount() {
         
     }
 
-    handleClick() {
+    handleLoadTimeline() {
+        http.request({
+            url: '/mobile/minhang/timeline/list',
+            data: {},
+            success: function (data) {
+                this.setState({
+                    timeline_list: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }
+        });
+    }
+
+    handleClick(timeline_id) {
 
     }
 
@@ -41,18 +59,15 @@ class Index extends Component {
                         slidesToScroll: 1,
                         arrows: false
                     }}>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
-                        <div className="index-4-carousel-item" onClick={this.handleClick.bind(this)}><img src={require('../../image/index_4_carousel.png')} alt=""/></div>
+                        {
+                            this.state.timeline_list.map((timeline, index) => {
+                                return (
+                                    <div key={index} className="index-4-carousel-item" onClick={this.handleClick.bind(this, timeline.timeline_id)}>
+                                        <img src={constant.host + timeline.timeline_image_file.file_path} alt=""/>
+                                    </div>
+                                )
+                            })
+                        }
                     </Slider>
 
                 </div>

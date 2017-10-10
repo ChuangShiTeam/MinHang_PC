@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import {connect} from 'dva';
-import {Modal} from 'antd';
+import {Modal, Spin} from 'antd';
 import Slider from 'react-slick';
 import notification from '../../util/notification';
 import http from '../../util/http';
@@ -13,6 +13,7 @@ class Index extends Component {
 
         this.state = {
             visible: false,
+            is_load: false,
             poster: {},
             poster_list: []
         }
@@ -33,6 +34,9 @@ class Index extends Component {
     }
 
     handleLoadPoster() {
+        this.setState({
+            is_load: true
+        });
         http.request({
             url: '/mobile/minhang/poster/list',
             data: {},
@@ -42,8 +46,11 @@ class Index extends Component {
                 });
             }.bind(this),
             complete: function () {
+                this.setState({
+                    is_load: false
+                });
 
-            }
+            }.bind(this)
         });
     }
 
@@ -76,28 +83,30 @@ class Index extends Component {
     }
 
     render() {
-        console.log('this.state.poster_list', this.state.poster_list);
         return (
+            <Spin spinning={this.state.is_load}>
             <div className="index-0-bg">
                 <div className="index-0-carousel">
-                    <Slider ref={c => this.slider = c } {...{
-                        infinite: true,
-                        speed: 500,
-                        slidesToShow: 4,
-                        slidesToScroll: 1,
-                        arrows: false
-                    }}>
-                        {
-                            this.state.poster_list.map((poster, index) => {
-                                return (
-                                    <div key={index} className="index-0-carousel-item" onClick={this.handleClick.bind(this, poster)}>
-                                        <img src={constant.host + poster.poster_image_file.file_original_path} alt=""/>
-                                    </div>
-                                )
-
-                            })
-                        }
-                    </Slider>
+                    {
+                        this.state.poster_list.length > 0 ?
+                            <Slider ref={c => this.slider = c } {...{
+                                infinite: true,
+                                speed: 500,
+                                slidesToShow: 4,
+                                slidesToScroll: 1,
+                                arrows: false
+                            }}>
+                                {
+                                    this.state.poster_list.map((poster, index) => {
+                                        return (
+                                            <div key={index} className="index-0-carousel-item" onClick={this.handleClick.bind(this, poster)}>
+                                                <img src={constant.host + poster.poster_image_file.file_path} alt=""/>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Slider>:null
+                    }
 
                 </div>
                 <div>
@@ -144,6 +153,7 @@ class Index extends Component {
                         </ul>
                     </div>
                 </div>
+
                 <Modal
                     title={this.state.poster.poster_title?this.state.poster.poster_title:null}
                     width = {1000}
@@ -151,10 +161,11 @@ class Index extends Component {
                     onOk={this.handleOk.bind(this)}
                     onCancel={this.handleCancel.bind(this)}
                 >
-                    <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.poster.poster_content?validate.unescapeHtml(this.state.poster.poster_content):null}}>
-                    </div>
+                        <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.poster.poster_content?validate.unescapeHtml(this.state.poster.poster_content):null}}>
+                        </div>
                 </Modal>
             </div>
+            </Spin>
         );
     }
 }
