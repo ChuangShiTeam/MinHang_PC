@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Pagination} from 'antd';
 import {connect} from 'dva';
-import {Modal} from 'antd';
+import {Modal, Spin} from 'antd';
 import {Player, ControlBar} from 'video-react';
 import http from '../../util/http';
 
@@ -15,7 +15,8 @@ class Index extends Component {
             total: 0,
             page_index: 1,
             page_size: 15,
-            video: {}
+            video: {},
+            is_load: false
         }
     }
 
@@ -29,6 +30,9 @@ class Index extends Component {
     }
 
     handleLoadVideo(page_index) {
+        this.setState({
+            is_load: true
+        });
         http.request({
             url: '/mobile/minhang/video/list',
             data: {
@@ -43,8 +47,10 @@ class Index extends Component {
                 });
             }.bind(this),
             complete: function () {
-
-            }
+                this.setState({
+                    is_load: false
+                });
+            }.bind(this)
         });
     }
 
@@ -75,6 +81,7 @@ class Index extends Component {
 
     render() {
         return (
+            <Spin spinning={this.state.is_load}>
             <div className="index-5-bg">
                 <div className="index-5-main">
                     <div className="index-5-title">课堂视频列表</div>
@@ -112,6 +119,7 @@ class Index extends Component {
                     </div>
                 </Modal>
             </div>
+            </Spin>
         );
     }
 }

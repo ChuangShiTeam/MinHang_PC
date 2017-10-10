@@ -1,5 +1,6 @@
 import React, {Component } from 'react';
 import {connect} from 'dva';
+import {Spin} from 'antd';
 import Slider from 'react-slick';
 
 import constant from '../../util/constant';
@@ -10,7 +11,8 @@ class Index extends Component {
         super(props);
 
         this.state = {
-            timeline_list: []
+            timeline_list: [],
+            is_load: false
         }
     }
 
@@ -23,6 +25,9 @@ class Index extends Component {
     }
 
     handleLoadTimeline() {
+        this.setState({
+            is_load: true
+        });
         http.request({
             url: '/mobile/minhang/timeline/list',
             data: {},
@@ -32,8 +37,10 @@ class Index extends Component {
                 });
             }.bind(this),
             complete: function () {
-
-            }
+                this.setState({
+                    is_load: false
+                });
+            }.bind(this)
         });
     }
 
@@ -50,30 +57,34 @@ class Index extends Component {
 
     render() {
         return (
+            <Spin spinning={this.state.is_load}>
             <div className="index-4-bg">
                 <div className="index-4-carousel">
-                    <Slider ref={c => this.slider = c } {...{
-                        infinite: true,
-                        speed: 500,
-                        slidesToShow: 7,
-                        slidesToScroll: 1,
-                        arrows: false
-                    }}>
-                        {
-                            this.state.timeline_list.map((timeline, index) => {
-                                return (
-                                    <div key={index} className="index-4-carousel-item" onClick={this.handleClick.bind(this, timeline.timeline_id)}>
-                                        <img src={constant.host + timeline.timeline_image_file.file_path} alt=""/>
-                                    </div>
-                                )
-                            })
-                        }
-                    </Slider>
-
+                    {
+                        this.state.timeline_list.length > 0 ?
+                            <Slider ref={c => this.slider = c } {...{
+                                infinite: true,
+                                speed: 500,
+                                slidesToShow: 7,
+                                slidesToScroll: 1,
+                                arrows: false
+                            }}>
+                                {
+                                    this.state.timeline_list.map((timeline, index) => {
+                                        return (
+                                            <div key={index} className="index-4-carousel-item" onClick={this.handleClick.bind(this, timeline.timeline_id)}>
+                                                <img src={constant.host + timeline.timeline_image_file.file_path} alt=""/>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </Slider>:null
+                    }
                 </div>
                 <div className="index-4-previous" onClick={this.handlePrevious.bind(this)}></div>
                 <div className="index-4-next" onClick={this.handleNext.bind(this)}></div>
             </div>
+            </Spin>
         );
     }
 }

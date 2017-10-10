@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import {connect} from 'dva';
-import {Modal} from 'antd';
+import {Modal,Spin} from 'antd';
 
 import http from '../../util/http';
 import validate from '../../util/validate';
@@ -11,8 +11,10 @@ class Index extends Component {
 
         this.state = {
             historyVisible: false,
+            is_history_load: false,
             party_history: {},
             songVisible: false,
+            is_song_load:false,
             party_song: {}
 
         }
@@ -27,34 +29,44 @@ class Index extends Component {
     }
 
     handleClickPartyHistory() {
+        this.setState({
+            is_history_load: true,
+            historyVisible: true
+        });
         http.request({
             url: '/mobile/minhang/party/history/random/find',
             data: {},
             success: function (data) {
                 this.setState({
-                    party_history: data,
-                    historyVisible: true
+                    party_history: data
                 });
             }.bind(this),
             complete: function () {
-
-            }
+                this.setState({
+                    is_history_load: false
+                });
+            }.bind(this)
         });
     }
 
     handleClickPartySong() {
+        this.setState({
+            is_song_load: true,
+            songVisible: true
+        });
         http.request({
             url: '/mobile/minhang/party/song/random/find',
             data: {},
             success: function (data) {
                 this.setState({
-                    party_song: data,
-                    songVisible: true
+                    party_song: data
                 });
             }.bind(this),
             complete: function () {
-
-            }
+                this.setState({
+                    is_song_load: false
+                });
+            }.bind(this)
         });
     }
 
@@ -104,9 +116,11 @@ class Index extends Component {
                     onOk={this.handleHistoryOk.bind(this)}
                     onCancel={this.handleHistoryCancel.bind(this)}
                 >
-                    <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.party_history.party_history_content?validate.unescapeHtml(this.state.party_history.party_history_content):null}}>
+                    <Spin spinning={this.state.is_history_load}>
+                        <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.party_history.party_history_content?validate.unescapeHtml(this.state.party_history.party_history_content):null}}>
 
-                    </div>
+                        </div>
+                    </Spin>
                 </Modal>
                 <Modal
                     title='跟唱党歌'
@@ -115,9 +129,11 @@ class Index extends Component {
                     onOk={this.handleSongOk.bind(this)}
                     onCancel={this.handleSongCancel.bind(this)}
                 >
-                    <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.party_song.party_song_content?validate.unescapeHtml(this.state.party_song.party_song_content):null}}>
+                    <Spin spinning={this.state.is_song_load}>
+                        <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.party_song.party_song_content?validate.unescapeHtml(this.state.party_song.party_song_content):null}}>
 
-                    </div>
+                        </div>
+                    </Spin>
                 </Modal>
             </div>
         );
