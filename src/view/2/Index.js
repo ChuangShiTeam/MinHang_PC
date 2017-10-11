@@ -1,6 +1,7 @@
 import React, {Component } from 'react';
 import {connect} from 'dva';
 import {Modal,Spin} from 'antd';
+import {Player, ControlBar} from 'video-react';
 
 import http from '../../util/http';
 import validate from '../../util/validate';
@@ -99,6 +100,7 @@ class Index extends Component {
     }
 
     render() {
+        console.log('party_song', this.state.party_song);
         return (
             <div className="index-2-bg">
                 <div className="con_but">
@@ -130,9 +132,16 @@ class Index extends Component {
                     onCancel={this.handleSongCancel.bind(this)}
                 >
                     <Spin spinning={this.state.is_song_load}>
-                        <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.party_song.party_song_content?validate.unescapeHtml(this.state.party_song.party_song_content):null}}>
-
+                        <div className="modal-main">
+                            <div dangerouslySetInnerHTML={{__html: this.state.party_song.party_song_content?validate.unescapeHtml(this.state.party_song.party_song_content):null}}>
+                            </div>
+                            {
+                                this.state.party_song.party_song_url?
+                                    <audio src={this.state.party_song.party_song_url}controls="controls">
+                                    </audio>:null
+                            }
                         </div>
+
                     </Spin>
                 </Modal>
             </div>

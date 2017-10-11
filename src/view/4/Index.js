@@ -21,7 +21,7 @@ class Index extends Component {
     }
 
     componentWillUnmount() {
-
+        
     }
 
     handleLoadTimeline() {
@@ -32,10 +32,6 @@ class Index extends Component {
             url: '/mobile/minhang/timeline/list',
             data: {},
             success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    data[i].is_level_0 = false;
-                }
-
                 this.setState({
                     timeline_list: data
                 });
