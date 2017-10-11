@@ -195,13 +195,45 @@
 .index-4-carousel {
     position: absolute;
     left: 1320px;
-    top: 160px;
+    top: 350px;
     width: 6115px;
     height: 814px;
 }
 
-.index-4-carousel-item {
+.timeline-item {
+    float: left;
+    width: 400px;
+    height: 300px;
+}
 
+.timeline-item-date {
+    color: red;
+    text-align: center;
+}
+
+.timeline-item-name {
+    text-align: center;
+}
+
+.timeline-event {
+    float: left;
+    width: 400px;
+    height: 500px;
+    margin-right: 20px;
+    padding: 10px 20px 10px 20px;
+    color: white;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background-color: black;
+}
+
+.timeline-event li {
+    height: 55px;
+    line-height: 55px;
+}
+
+.timeline-event .active {
+    border-bottom: 1px solid #404040;
 }
 
 .index-4-previous {

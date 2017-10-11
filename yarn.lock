@@ -6279,6 +6279,10 @@ react-error-overlay@^1.0.7:
     settle-promise "1.0.0"
     source-map "0.5.6"
 
+react-html5video@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/react-html5video/-/react-html5video-2.4.0.tgz#255f791f5a1b342d9a3f3a5e1df0f44ddc88aaa0"
+
 react-lazy-load@^3.0.10:
   version "3.0.12"
   resolved "https://registry.yarnpkg.com/react-lazy-load/-/react-lazy-load-3.0.12.tgz#2b841dfc3227e8119d033189d2c960ce384d0cb9"
