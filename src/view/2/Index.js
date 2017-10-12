@@ -112,8 +112,9 @@ class Index extends Component {
                     </buttom>
                 </div>
                 <Modal
+                    centered modal dialog
                     title='朗读党史'
-                    width = {800}
+                    width = {1000}
                     visible={this.state.historyVisible}
                     onOk={this.handleHistoryOk.bind(this)}
                     onCancel={this.handleHistoryCancel.bind(this)}
@@ -122,11 +123,35 @@ class Index extends Component {
                         <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.party_history.party_history_content?validate.unescapeHtml(this.state.party_history.party_history_content):null}}>
 
                         </div>
+                        <div className="modal-footer">
+                            <img className="task-qrcode" src="" alt=""/>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                        </div>
                     </Spin>
                 </Modal>
                 <Modal
+                    centered modal dialog
                     title='跟唱党歌'
-                    width = {800}
+                    width = {1000}
                     visible={this.state.songVisible}
                     onOk={this.handleSongOk.bind(this)}
                     onCancel={this.handleSongCancel.bind(this)}
@@ -141,7 +166,29 @@ class Index extends Component {
                                     </audio>:null
                             }
                         </div>
-
+                        <div className="modal-footer">
+                            <img className="task-qrcode" src="" alt=""/>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                        </div>
                     </Spin>
                 </Modal>
             </div>

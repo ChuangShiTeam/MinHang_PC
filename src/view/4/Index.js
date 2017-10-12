@@ -12,6 +12,9 @@ class Index extends Component {
 
         this.state = {
             timeline_list: [],
+            event: {
+
+            },
             is_load: false
         }
     }
@@ -21,7 +24,7 @@ class Index extends Component {
     }
 
     componentWillUnmount() {
-        
+
     }
 
     handleLoadTimeline() {
@@ -32,6 +35,34 @@ class Index extends Component {
             url: '/mobile/minhang/timeline/list',
             data: {},
             success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    data[i].event_list = [{
+                        event_id: '0',
+                        event_name: '0',
+                        event_content: '000',
+                        is_active: true
+                    }, {
+                        event_id: '1',
+                        event_name: '1',
+                        event_content: '111',
+                        is_active: false
+                    }, {
+                        event_id: '2',
+                        event_name: '2',
+                        event_content: '222',
+                        is_active: false
+                    }, {
+                        event_id: '3',
+                        event_name: '3',
+                        event_content: '333',
+                        is_active: false
+                    }, {
+                        event_id: '4',
+                        event_name: '4',
+                        event_content: '444',
+                        is_active: false
+                    }]
+                }
                 this.setState({
                     timeline_list: data
                 });
@@ -44,14 +75,53 @@ class Index extends Component {
         });
     }
 
-    handleClick(timeline_id) {
+    handleClickTimeline(timeline_id) {
         var data = this.state.timeline_list;
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].timeline_id == timeline_id) {
-                data[i].is_level_0 = !data[i].is_level_0;
+                data[i].is_active = !data[i].is_active;
+
+                if (data[i].is_active) {
+                    data[i].width = 1820;
+                } else {
+                    data[i].width = 400;
+                }
+
+                for (var j = 0; j < data[i].event_list.length; j++) {
+                    if (data[i].event_list[j].is_active) {
+                        this.setState({
+                            event: data[i].event_list[j]
+                        });
+                    }
+                }
             } else {
-                data[i].is_level_0 = false;
+                data[i].is_active = false;
+                data[i].width = 400;
+            }
+        }
+
+        this.setState({
+            timeline_list: data
+        });
+    }
+
+    handleClickEvent(timeline_id, event_id) {
+        var data = this.state.timeline_list;
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].timeline_id == timeline_id) {
+                for (var j = 0; j < data[i].event_list.length; j++) {
+                    if (data[i].event_list[j].event_id == event_id) {
+                        data[i].event_list[j].is_active = true;
+
+                        this.setState({
+                            event: data[i].event_list[j]
+                        });
+                    } else {
+                        data[i].event_list[j].is_active = false;
+                    }
+                }
             }
         }
 
@@ -83,29 +153,58 @@ class Index extends Component {
                                     arrows: false
                                 }}>
                                     {
-                                        this.state.timeline_list.map((timeline, index) => {
+                                        this.state.timeline_list.map((timeline) => {
                                             return (
-                                                <div key={index} style={{width: timeline.is_level_0 ? 820 : 400 + "px"}}>
-                                                    <div className="timeline-item" onClick={this.handleClick.bind(this, timeline.timeline_id)}>
+                                                <div key={timeline.timeline_id} style={{width: timeline.width + "px"}}>
+                                                    <div className="timeline-item" onClick={this.handleClickTimeline.bind(this, timeline.timeline_id)}>
                                                         <div className="timeline-item-date">2017</div>
                                                         <div className="timeline-item-name">title</div>
                                                         <img src={constant.host + timeline.timeline_image_file.file_path} alt=""/>
                                                     </div>
-                                                    <div className="timeline-event" style={{visibility: timeline.is_level_0 ? "visible" : "hidden"}}>
-                                                        <li className="active">ddd</li>
-                                                        <li className="active">ddd</li>
-                                                        <li className="active">ddd</li>
-                                                        <li className="active">ddd</li>
-                                                        <li className="active">ddd</li>
-                                                        <li className="active">ddd</li>
-                                                        <li className="active">ddd</li>
-                                                        <li className="">ddd</li>
+                                                    <div className="timeline-event" style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
+                                                        {
+                                                            timeline.event_list.map((event) => {
+                                                                return (
+                                                                    <li className={event.is_active ? "active" : ""} onClick={this.handleClickEvent.bind(this, timeline.timeline_id, event.event_id)}>ddd</li>
+                                                                )
+                                                            })
+                                                        }
+                                                    </div>
+                                                    <div className="timeline-event-item" style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
+                                                        <div className="timeline-event-item-main">
+                                                            {this.state.event.event_content}
+                                                        </div>
+                                                        <div>
+                                                            <img className="task-qrcode" src="" alt="" />
+                                                            <div className="task-member">
+                                                                <div className="member-avatar"></div>
+                                                                <div className="member-name">user name</div>
+                                                            </div>
+                                                            <div className="task-member">
+                                                                <div className="member-avatar"></div>
+                                                                <div className="member-name">user name</div>
+                                                            </div>
+                                                            <div className="task-member">
+                                                                <div className="member-avatar"></div>
+                                                                <div className="member-name">user name</div>
+                                                            </div>
+                                                            <div className="task-member">
+                                                                <div className="member-avatar"></div>
+                                                                <div className="member-name">user name</div>
+                                                            </div>
+                                                            <div className="task-member">
+                                                                <div className="member-avatar"></div>
+                                                                <div className="member-name">user name</div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             )
                                         })
                                     }
-                                </Slider>:null
+                                </Slider>
+                                :
+                                ''
                         }
                     </div>
                     <div className="index-4-previous" onClick={this.handlePrevious.bind(this)}></div>

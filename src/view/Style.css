@@ -7,7 +7,22 @@
 
 .modal-main {
     height: 700px;
-    overflow-y:auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    height: 120px;
+    padding: 20px 10px 10px 10px;
+    border-top: 1px solid #e9e9e9;
+}
+
+.modal-footer .task-qrcode {
+    background-color: #404040;
+}
+
+.modal-footer .task-member .member-avatar {
+    background-color: #404040;
 }
 
 /*index-0*/
@@ -16,7 +31,7 @@
     height: 1080px;
     margin: 0 auto;
     position: relative;
-    background: url('../image/index_00_bg.jpg') no-repeat center;
+    background: url('../image/index_00_bg.png') no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -34,6 +49,7 @@
 
 .index-0-carousel-item img {
     width: 270px;
+    height: 150px;
 }
 
 .index-0-carousel-previous {
@@ -171,7 +187,7 @@
     height: 1600px;
     margin: 0 auto;
     position: relative;
-    background: url('../image/index_3_bg.jpg') no-repeat center;
+    background: url('../image/index_3_bg.png') no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -189,14 +205,14 @@
     height: 1080px;
     margin: 0 auto;
     position: relative;
-    background: url('../image/index_4_bg.jpg') no-repeat center;
+    background: url('../image/index_4_bg.png') no-repeat center;
     background-size: 100% 100%;
 }
 
 .index-4-carousel {
     position: absolute;
     left: 1320px;
-    top: 350px;
+    top: 300px;
     width: 6115px;
     height: 814px;
 }
@@ -205,6 +221,9 @@
     float: left;
     width: 400px;
     height: 300px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .timeline-item-date {
@@ -220,21 +239,41 @@
     float: left;
     width: 400px;
     height: 500px;
-    margin-right: 20px;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 0px 10px 0px;
     color: white;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     background-color: black;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .timeline-event li {
     height: 55px;
     line-height: 55px;
+    border-bottom: 1px solid #404040;
+    padding-left: 20px;
 }
 
 .timeline-event .active {
-    border-bottom: 1px solid #404040;
+    background-color: #404040;
+}
+
+.timeline-event-item {
+    float: left;
+    width: 1000px;
+    height: 500px;
+    margin-right: 20px;
+    padding: 20px;
+    color: #ffffff;
+    font-size: 20px;
+    background-color: #404040;
+}
+
+.timeline-event-item-main {
+    height: 360px;
+    overflow-y: auto;
 }
 
 .index-4-previous {
@@ -288,4 +327,31 @@
 
 .play-toggle {
     visibility: hidden;
+}
+
+.task-qrcode {
+    float: left;
+    width: 100px;
+    height: 100px;
+    background-color: #ffffff;
+    margin-right: 20px;
+}
+
+.task-member {
+    float: left;
+    width: 120px;
+}
+
+.task-member .member-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.task-member .member-name {
+    text-align: center;
+    margin-top: 10px;
 }
