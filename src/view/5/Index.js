@@ -5,12 +5,15 @@ import {Modal, Spin} from 'antd';
 import {DefaultPlayer as Video} from 'react-html5video';
 import http from '../../util/http';
 
+var timer;
+
 class Index extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             visible: false,
+            is_question: false,
             video_list: [],
             total: 0,
             page_index: 1,
@@ -61,15 +64,43 @@ class Index extends Component {
         }, function () {
             this.refs.video.videoEl.src = this.state.video.video_url;
             this.refs.video.videoEl.play();
+
+            timer = setTimeout(function () {
+                this.refs.video.videoEl.pause();
+
+                this.setState({
+                    is_question: true
+                });
+            }.bind(this), 2000);
         }.bind(this));
     }
 
     handleCancel() {
         this.refs.video.videoEl.pause();
 
+        if (timer) {
+            clearTimeout(timer);
+        }
+
         this.setState({
             video: {},
             visible: false
+        });
+    }
+
+    handleCanceQuestion() {
+        this.refs.video.videoEl.play();
+
+        timer = setTimeout(function () {
+            this.refs.video.videoEl.pause();
+
+            this.setState({
+                is_question: true
+            });
+        }.bind(this), 2000);
+
+        this.setState({
+            is_question: false
         });
     }
 
@@ -117,6 +148,42 @@ class Index extends Component {
                                 >
                                     <source type="video/mp4"/>
                                 </Video>
+                            </div>
+                        </div>
+                    </Modal>
+                    <Modal
+                        title="问题"
+                        width={1000}
+                        visible={this.state.is_question}
+                        onOk={this.handleCanceQuestion.bind(this)}
+                        onCancel={this.handleCanceQuestion.bind(this)}
+                    >
+                        <div className="modal-main">
+                            <div>
+                                123
+                            </div>
+                        </div>
+                        <div className="modal-footer">
+                            <img className="task-qrcode" src="" alt=""/>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
+                            </div>
+                            <div className="task-member">
+                                <div className="member-avatar"></div>
+                                <div className="member-name">user name</div>
                             </div>
                         </div>
                     </Modal>
