@@ -1,7 +1,6 @@
 import React, {Component } from 'react';
 import {connect} from 'dva';
 import {Modal,Spin} from 'antd';
-import {Player, ControlBar} from 'video-react';
 
 import http from '../../util/http';
 import validate from '../../util/validate';

@@ -15,16 +15,14 @@ class Index extends Component {
             visible: false,
             is_load: false,
             poster: {},
-            poster_list: []
+            poster_list: [],
+            user_list: []
         }
     }
 
     componentDidMount() {
-        notification.on('event', this, function (data) {
-            this.setState({
-                is_show: true,
-                action: 'save'
-            });
+        notification.on('loadPoster', this, function (data) {
+            this.handleReloadUser();
         });
         this.handleLoadPoster();
     }
@@ -66,20 +64,44 @@ class Index extends Component {
         this.setState({
             poster: poster,
             visible: true
+        }, function() {
+            this.handleReloadUser();
+        }.bind(this));
+    }
+
+    handleReloadUser() {
+        console.log(this.state.poster);
+        http.request({
+            url: '/mobile/minhang/task/user/complete/list',
+            data: {
+                task_id: this.state.poster.task_id,
+                page_index: 1,
+                page_size: 7
+            },
+            success: function (data) {
+                this.setState({
+                    user_list: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }.bind(this)
         });
     }
 
     handleOk() {
         this.setState({
             poster: {},
-            visible: false
+            visible: false,
+            user_list: []
         });
     }
 
     handleCancel() {
         this.setState({
             poster: {},
-            visible: false
+            visible: false,
+            user_list: []
         });
     }
 
@@ -176,27 +198,18 @@ class Index extends Component {
                              dangerouslySetInnerHTML={{__html: this.state.poster.poster_content?validate.unescapeHtml(this.state.poster.poster_content):null}}>
                         </div>
                         <div className="modal-footer">
-                            <img className="task-qrcode" src="" alt=""/>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
+                            <img className="task-qrcode" src={constant.host + this.state.poster.task_qrcode_url} alt=""/>
+                            {
+                                this.state.user_list.map((user, index) => {
+                                    return (
+                                    <div className="task-member" key={index}>
+                                        <div className="member-avatar">
+                                            <img src={user.user_avatar} alt=""/>
+                                        </div>
+                                        <div className="member-name">{user.user_name}</div>
+                                    </div>)
+                                })
+                            }
                         </div>
                     </Modal>
                 </div>

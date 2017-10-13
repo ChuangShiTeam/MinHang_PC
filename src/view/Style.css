@@ -13,15 +13,11 @@
 
 .modal-footer {
     height: 120px;
-    padding: 20px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     border-top: 1px solid #e9e9e9;
 }
 
 .modal-footer .task-qrcode {
-    background-color: #404040;
-}
-
-.modal-footer .task-member .member-avatar {
     background-color: #404040;
 }
 
@@ -331,24 +327,28 @@
 
 .task-qrcode {
     float: left;
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     background-color: #ffffff;
     margin-right: 20px;
 }
 
 .task-member {
     float: left;
-    width: 120px;
+    width: 100px;
 }
 
-.task-member .member-avatar {
-    width: 70px;
-    height: 70px;
+.task-member .member-avatar{
+    text-align: center;
+    margin-top: 15px;
+}
+
+.task-member .member-avatar img{
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     vertical-align: middle;
     margin: 0 auto;
-    background-color: #ffffff;
 }
 
 .task-member .member-name {
