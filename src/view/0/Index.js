@@ -146,7 +146,7 @@ class Index extends Component {
 
                     <div className="side">
                         <div className="public_signal">
-                            <img src={require('../../image/code_img_00.png')} alt=""/>
+                            <img src={require('../../image/code_img_00.jpg')} alt=""/>
                             <p>扫二维码关注公众号</p>
                         </div>
                         <div className="member">
