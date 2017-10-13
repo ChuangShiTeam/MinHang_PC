@@ -4,6 +4,7 @@ import {Modal,Spin} from 'antd';
 
 import http from '../../util/http';
 import validate from '../../util/validate';
+import constant from '../../util/constant';
 
 class Index extends Component {
     constructor(props) {
@@ -123,7 +124,7 @@ class Index extends Component {
 
                         </div>
                         <div className="modal-footer">
-                            <img className="task-qrcode" src="" alt=""/>
+                            <img className="task-qrcode" src={constant.host + this.state.party_history.task_qrcode_url} alt=""/>
                             <div className="task-member">
                                 <div className="member-avatar"></div>
                                 <div className="member-name">user name</div>
@@ -166,7 +167,8 @@ class Index extends Component {
                             }
                         </div>
                         <div className="modal-footer">
-                            <img className="task-qrcode" src="" alt=""/>
+                            <img className="task-qrcode" src={constant.host + this.state.party_song.task_qrcode_url} alt=""/>
+                            {this.state.party_song.task_qrcode_url}
                             <div className="task-member">
                                 <div className="member-avatar"></div>
                                 <div className="member-name">user name</div>

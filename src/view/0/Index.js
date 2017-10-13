@@ -16,7 +16,8 @@ class Index extends Component {
             is_load: false,
             poster: {},
             poster_list: [],
-            user_list: []
+            user_list: [],
+            member_list: []
         }
     }
 
@@ -24,7 +25,12 @@ class Index extends Component {
         notification.on('loadPoster', this, function (data) {
             this.handleReloadUser();
         });
+        notification.on('loadMember', this, function (data) {
+            console.log('开始刷新会员');
+            this.handleReloadMember();
+        });
         this.handleLoadPoster();
+        this.handleReloadMember();
     }
 
     componentWillUnmount() {
@@ -48,6 +54,29 @@ class Index extends Component {
                     is_load: false
                 });
 
+            }.bind(this)
+        });
+    }
+
+    handleReloadMember() {
+        this.setState({
+            is_load: true
+        });
+        http.request({
+            url: '/mobile/minhang/member/list',
+            data: {
+                page_index: 1,
+                page_size: 7
+            },
+            success: function (data) {
+                this.setState({
+                    member_list: data
+                });
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_load: false
+                });
             }.bind(this)
         });
     }
@@ -152,36 +181,16 @@ class Index extends Component {
                         <div className="member">
                             <p>登陆成功的党员</p>
                             <ul>
-                                <li>
-                                    <img className="member-image" src={require('../../image/index_00_uimg01.png')}
-                                         alt=""/>
-                                    <span>微信名字</span>
-                                </li>
-                                <li>
-                                    <img className="member-image" src={require('../../image/index_00_uimg01.png')}
-                                         alt=""/>
-                                    <span>微信名字</span>
-                                </li>
-                                <li>
-                                    <img className="member-image" src={require('../../image/index_00_uimg01.png')}
-                                         alt=""/>
-                                    <span>微信名字</span>
-                                </li>
-                                <li>
-                                    <img className="member-image" src={require('../../image/index_00_uimg01.png')}
-                                         alt=""/>
-                                    <span>微信名字</span>
-                                </li>
-                                <li>
-                                    <img className="member-image" src={require('../../image/index_00_uimg01.png')}
-                                         alt=""/>
-                                    <span>微信名字</span>
-                                </li>
-                                <li>
-                                    <img className="member-image" src={require('../../image/index_00_uimg01.png')}
-                                         alt=""/>
-                                    <span>微信名字</span>
-                                </li>
+                                {
+                                    this.state.member_list.map((member, index) => {
+                                        return (
+                                            <li key={index}>
+                                                <img className="member-image" src={member.user_avatar}
+                                                     alt=""/>
+                                                <span>{member.user_name}</span>
+                                            </li>)
+                                    })
+                                }
                             </ul>
                         </div>
                     </div>
