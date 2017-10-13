@@ -26,7 +26,6 @@ class Index extends Component {
             this.handleReloadUser();
         });
         notification.on('loadMember', this, function (data) {
-            console.log('开始刷新会员');
             this.handleReloadMember();
         });
         this.handleLoadPoster();
@@ -99,13 +98,12 @@ class Index extends Component {
     }
 
     handleReloadUser() {
-        console.log(this.state.poster);
         http.request({
             url: '/mobile/minhang/task/user/complete/list',
             data: {
                 task_id: this.state.poster.task_id,
                 page_index: 1,
-                page_size: 7
+                page_size: 8
             },
             success: function (data) {
                 this.setState({

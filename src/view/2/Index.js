@@ -16,17 +16,46 @@ class Index extends Component {
             party_history: {},
             songVisible: false,
             is_song_load:false,
-            party_song: {}
-
+            party_song: {},
+            user_list: []
         }
     }
 
     componentDidMount() {
-        
+
+        notification.on('loadPartyHistory', this, function (data) {
+            if (this.state.party_history && this.state.party_history.task_id) {
+                this.handleReloadUser(this.state.party_history.task_id);
+            }
+        });
+        notification.on('loadPartySong', this, function (data) {
+            if (this.state.party_song && this.state.party_song.task_id) {
+                this.handleReloadUser(this.state.party_song.task_id);
+            }
+        });
     }
 
     componentWillUnmount() {
         
+    }
+
+    handleReloadUser(task_id) {
+        http.request({
+            url: '/mobile/minhang/task/user/complete/list',
+            data: {
+                task_id: task_id,
+                page_index: 1,
+                page_size: 8
+            },
+            success: function (data) {
+                this.setState({
+                    user_list: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }.bind(this)
+        });
     }
 
     handleClickPartyHistory() {
@@ -40,7 +69,9 @@ class Index extends Component {
             success: function (data) {
                 this.setState({
                     party_history: data
-                });
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
             }.bind(this),
             complete: function () {
                 this.setState({
@@ -61,7 +92,9 @@ class Index extends Component {
             success: function (data) {
                 this.setState({
                     party_song: data
-                });
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
             }.bind(this),
             complete: function () {
                 this.setState({
@@ -74,33 +107,36 @@ class Index extends Component {
     handleHistoryOk() {
         this.setState({
             party_history: {},
-            historyVisible: false
+            historyVisible: false,
+            user_list: []
         });
     }
 
     handleHistoryCancel() {
         this.setState({
             party_history: {},
-            historyVisible: false
+            historyVisible: false,
+            user_list: []
         });
     }
 
     handleSongOk() {
         this.setState({
             party_song: {},
-            songVisible: false
+            songVisible: false,
+            user_list: []
         });
     }
 
     handleSongCancel() {
         this.setState({
             party_song: {},
-            songVisible: false
+            songVisible: false,
+            user_list: []
         });
     }
 
     render() {
-        console.log('party_song', this.state.party_song);
         return (
             <div className="index-2-bg">
                 <div className="con_but">
@@ -125,26 +161,17 @@ class Index extends Component {
                         </div>
                         <div className="modal-footer">
                             <img className="task-qrcode" src={constant.host + this.state.party_history.task_qrcode_url} alt=""/>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
+                            {
+                                this.state.user_list.map((user, index) => {
+                                    return (
+                                        <div className="task-member" key={index}>
+                                            <div className="member-avatar">
+                                                <img src={user.user_avatar} alt=""/>
+                                            </div>
+                                            <div className="member-name">{user.user_name}</div>
+                                        </div>)
+                                })
+                            }
                         </div>
                     </Spin>
                 </Modal>
@@ -168,27 +195,17 @@ class Index extends Component {
                         </div>
                         <div className="modal-footer">
                             <img className="task-qrcode" src={constant.host + this.state.party_song.task_qrcode_url} alt=""/>
-                            {this.state.party_song.task_qrcode_url}
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
+                            {
+                                this.state.user_list.map((user, index) => {
+                                    return (
+                                        <div className="task-member" key={index}>
+                                            <div className="member-avatar">
+                                                <img src={user.user_avatar} alt=""/>
+                                            </div>
+                                            <div className="member-name">{user.user_name}</div>
+                                        </div>)
+                                })
+                            }
                         </div>
                     </Spin>
                 </Modal>
