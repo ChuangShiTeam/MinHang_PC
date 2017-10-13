@@ -5,6 +5,7 @@ import {Modal,Spin} from 'antd';
 import http from '../../util/http';
 import validate from '../../util/validate';
 import constant from '../../util/constant';
+import notification from '../../util/notification';
 
 class Index extends Component {
     constructor(props) {
