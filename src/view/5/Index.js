@@ -4,6 +4,7 @@ import {connect} from 'dva';
 import {Modal, Spin} from 'antd';
 import {DefaultPlayer as Video} from 'react-html5video';
 import http from '../../util/http';
+import notification from '../../util/notification';
 
 var taskTimer;
 var taskSecond = 3000;
@@ -23,17 +24,43 @@ class Index extends Component {
             page_index: 1,
             page_size: 15,
             video: {},
+            video_task: {},
+            user_list: [],
             is_load: false
         }
     }
 
     componentDidMount() {
+        notification.on('loadVideoTask', this, function (data) {
+            if (this.state.video_task && this.state.video_task.task_id) {
+                this.handleReloadUser(this.state.video_task.task_id);
+            }
+        });
         let page_index = this.state.page_index;
         this.handleLoadVideo(page_index);
     }
 
     componentWillUnmount() {
 
+    }
+
+    handleReloadUser(task_id) {
+        http.request({
+            url: '/mobile/minhang/task/user/complete/list',
+            data: {
+                task_id: task_id,
+                page_index: 1,
+                page_size: 8
+            },
+            success: function (data) {
+                this.setState({
+                    user_list: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }.bind(this)
+        });
     }
 
     handleLoadVideo(page_index) {

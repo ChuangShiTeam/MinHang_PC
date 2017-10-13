@@ -5,6 +5,8 @@ import Slider from 'react-slick';
 
 import constant from '../../util/constant';
 import http from '../../util/http';
+import validate from '../../util/validate';
+import notification from '../../util/notification';
 
 class Index extends Component {
     constructor(props) {
@@ -12,19 +14,42 @@ class Index extends Component {
 
         this.state = {
             timeline_list: [],
-            event: {
-
-            },
-            is_load: false
+            timeline_event: {},
+            is_load: false,
+            user_list: []
         }
     }
 
     componentDidMount() {
+        notification.on('loadTimelineEvent', this, function (data) {
+            if (this.state.timeline_event && this.state.timeline_event.task_id) {
+                this.handleReloadUser(this.state.timeline_event.task_id);
+            }
+        });
         this.handleLoadTimeline();
     }
 
     componentWillUnmount() {
 
+    }
+
+    handleReloadUser(task_id) {
+        http.request({
+            url: '/mobile/minhang/task/user/complete/list',
+            data: {
+                task_id: task_id,
+                page_index: 1,
+                page_size: 8
+            },
+            success: function (data) {
+                this.setState({
+                    user_list: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }.bind(this)
+        });
     }
 
     handleLoadTimeline() {
@@ -36,32 +61,13 @@ class Index extends Component {
             data: {},
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    data[i].event_list = [{
-                        event_id: '0',
-                        event_name: '0',
-                        event_content: '000',
-                        is_active: true
-                    }, {
-                        event_id: '1',
-                        event_name: '1',
-                        event_content: '111',
-                        is_active: false
-                    }, {
-                        event_id: '2',
-                        event_name: '2',
-                        event_content: '222',
-                        is_active: false
-                    }, {
-                        event_id: '3',
-                        event_name: '3',
-                        event_content: '333',
-                        is_active: false
-                    }, {
-                        event_id: '4',
-                        event_name: '4',
-                        event_content: '444',
-                        is_active: false
-                    }]
+                    if (data[i].timeline_event_list && data[i].timeline_event_list.length > 0) {
+                        data[i].timeline_event_list = data[i].timeline_event_list.map(timeline_event => {
+                            timeline_event.is_active = false;
+                            return timeline_event;
+                        })
+                        data[i].timeline_event_list[0].is_active = true;
+                    }
                 }
                 this.setState({
                     timeline_list: data
@@ -88,11 +94,13 @@ class Index extends Component {
                     data[i].width = 400;
                 }
 
-                for (var j = 0; j < data[i].event_list.length; j++) {
-                    if (data[i].event_list[j].is_active) {
+                for (var j = 0; j < data[i].timeline_event_list.length; j++) {
+                    if (data[i].timeline_event_list[j].is_active) {
                         this.setState({
-                            event: data[i].event_list[j]
-                        });
+                            timeline_event: data[i].timeline_event_list[j]
+                        }, function() {
+                            this.handleReloadUser(this.state.timeline_event.task_id);
+                        }.bind(this));
                     }
                 }
             } else {
@@ -106,20 +114,20 @@ class Index extends Component {
         });
     }
 
-    handleClickEvent(timeline_id, event_id) {
+    handleClickEvent(timeline_id, timeline_event_id) {
         var data = this.state.timeline_list;
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].timeline_id == timeline_id) {
-                for (var j = 0; j < data[i].event_list.length; j++) {
-                    if (data[i].event_list[j].event_id == event_id) {
-                        data[i].event_list[j].is_active = true;
+                for (var j = 0; j < data[i].timeline_event_list.length; j++) {
+                    if (data[i].timeline_event_list[j].timeline_event_id == timeline_event_id) {
+                        data[i].timeline_event_list[j].is_active = true;
 
                         this.setState({
-                            event: data[i].event_list[j]
+                            timeline_event: data[i].timeline_event_list[j]
                         });
                     } else {
-                        data[i].event_list[j].is_active = false;
+                        data[i].timeline_event_list[j].is_active = false;
                     }
                 }
             }
@@ -157,45 +165,42 @@ class Index extends Component {
                                             return (
                                                 <div key={timeline.timeline_id} style={{width: timeline.width + "px"}}>
                                                     <div className="timeline-item" onClick={this.handleClickTimeline.bind(this, timeline.timeline_id)}>
-                                                        <div className="timeline-item-date">2017</div>
-                                                        <div className="timeline-item-name">title</div>
+                                                        <div className="timeline-item-date">{timeline.timeline_year}</div>
+                                                        <div className="timeline-item-name">{timeline.timeline_description}</div>
                                                         <img src={constant.host + timeline.timeline_image_file.file_path} alt=""/>
                                                     </div>
                                                     <div className="timeline-event" style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
                                                         {
-                                                            timeline.event_list.map((event) => {
+                                                            timeline.timeline_event_list.map((timeline_event) => {
                                                                 return (
-                                                                    <li className={event.is_active ? "active" : ""} onClick={this.handleClickEvent.bind(this, timeline.timeline_id, event.event_id)}>ddd</li>
+                                                                    <li className={timeline_event.is_active ? "active" : ""} onClick={this.handleClickEvent.bind(this, timeline.timeline_id, timeline_event.timeline_event_id)}>{timeline_event.timeline_event_title}</li>
                                                                 )
                                                             })
                                                         }
                                                     </div>
                                                     <div className="timeline-event-item" style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
-                                                        <div className="timeline-event-item-main">
-                                                            {this.state.event.event_content}
+                                                        <div className="timeline-event-item-main"
+                                                             dangerouslySetInnerHTML={{__html: this.state.timeline_event.timeline_event_content?validate.unescapeHtml(this.state.timeline_event.timeline_event_content):null}}>
+
                                                         </div>
                                                         <div>
-                                                            <img className="task-qrcode" src="" alt="" />
-                                                            <div className="task-member">
-                                                                <div className="member-avatar"></div>
-                                                                <div className="member-name">user name</div>
-                                                            </div>
-                                                            <div className="task-member">
-                                                                <div className="member-avatar"></div>
-                                                                <div className="member-name">user name</div>
-                                                            </div>
-                                                            <div className="task-member">
-                                                                <div className="member-avatar"></div>
-                                                                <div className="member-name">user name</div>
-                                                            </div>
-                                                            <div className="task-member">
-                                                                <div className="member-avatar"></div>
-                                                                <div className="member-name">user name</div>
-                                                            </div>
-                                                            <div className="task-member">
-                                                                <div className="member-avatar"></div>
-                                                                <div className="member-name">user name</div>
-                                                            </div>
+                                                                {
+                                                                    this.state.timeline_event.task_qrcode_url?
+                                                                        <img className="task-qrcode" src={constant.host + this.state.timeline_event.task_qrcode_url} alt="" />
+                                                                        :
+                                                                        null
+                                                                }
+
+                                                                {
+                                                                    this.state.user_list.map((user, index) => {
+                                                                        return (
+                                                                        <div className="task-member" key={index}>
+                                                                        <div className="member-avatar">
+                                                                        <img src={user.user_avatar} alt=""/>
+                                                                        </div>
+                                                                        <div className="member-name">{user.user_name}</div>
+                                                                        </div>)
+                                                                })}
                                                         </div>
                                                     </div>
                                                 </div>
