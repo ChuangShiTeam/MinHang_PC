@@ -5,11 +5,9 @@ import {Modal, Spin} from 'antd';
 import {DefaultPlayer as Video} from 'react-html5video';
 import http from '../../util/http';
 import notification from '../../util/notification';
+import constant from '../../util/constant';
 
 var taskTimer;
-var taskSecond = 3000;
-var millisecondTimer;
-var millisecond = 0;
 
 class Index extends Component {
     constructor(props) {
@@ -24,7 +22,9 @@ class Index extends Component {
             page_index: 1,
             page_size: 15,
             video: {},
+            video_task_list: [],
             video_task: {},
+            video_task_list_index: 0,
             user_list: [],
             is_load: false
         }
@@ -32,7 +32,7 @@ class Index extends Component {
 
     componentDidMount() {
         notification.on('loadVideoTask', this, function (data) {
-            if (this.state.video_task && this.state.video_task.task_id) {
+            if (this.state.video_task_list && this.state.video_task.task_id) {
                 this.handleReloadUser(this.state.video_task.task_id);
             }
         });
@@ -89,35 +89,65 @@ class Index extends Component {
     }
 
     handleClickVideo(video) {
-        this.setState({
-            video: video,
-            visible: true
-        }, function () {
-            this.refs.video.videoEl.src = this.state.video.video_url;
-            this.refs.video.videoEl.play();
-        }.bind(this));
+        let video_task_list = video.video_task_list;
+        if (video_task_list && video_task_list.length > 0) {
+            this.setState({
+                video: video,
+                video_task_list: video_task_list,
+                video_task_list_index: 0,
+                video_task: video_task_list[0],
+                visible: true
+            }, function () {
+                this.refs.video.videoEl.src = this.state.video.video_url;
+                taskTimer = setTimeout(function () {
+                    this.refs.video.videoEl.pause();
+                    this.setState({
+                        is_question: true
+                    }, function() {
+                        this.handleReloadUser(this.state.video_task.task_id);
+                    }.bind(this));
+                }.bind(this), video_task_list[0].video_task_time * 1000);
+                this.refs.video.videoEl.play();
+            }.bind(this));
+        }
     }
 
     handleCancelVideo() {
         this.refs.video.videoEl.pause();
-
+        clearTimeout(taskTimer);
         this.setState({
             video: {},
+            video_task_list: [],
+            video_task:{},
+            video_task_list_index: 0,
+            user_list: [],
             visible: false
         });
     }
 
     handleCanceQuestion() {
         this.refs.video.videoEl.play();
+        let {video_task_list, video_task_list_index, video_task} = this.state;
+        if ((video_task_list_index + 1) < video_task_list.length) {
+            taskTimer = setTimeout(function () {
+                this.refs.video.videoEl.pause();
+                this.setState({
+                    is_question: true,
+                    video_task_list_index: this.state.video_task_list_index + 1 ,
+                    video_task: this.state.video_task_list[this.state.video_task_list_index + 1]
+                }, function() {
+                    this.handleReloadUser(this.state.video_task.task_id);
+                }.bind(this));
+            }.bind(this), (video_task_list[video_task_list_index + 1].video_task_time - video_task.video_task_time) * 1000);
 
-        taskTimer = setTimeout(function () {
-            this.refs.video.videoEl.pause();
-
+        } else {
             this.setState({
-                is_question: true
+                video_task_list: [],
+                video_task:{},
+                video_task_list_index: 0,
+                user_list: []
             });
-        }.bind(this), 2000);
-
+        }
         this.setState({
             is_question: false
         });
@@ -128,29 +158,12 @@ class Index extends Component {
     }
 
     handlePayVideo() {
-        taskTimer = setTimeout(function () {
-            this.setState({
-                is_question: true,
-                is_stop_to_answer_the_question: true
-            }, function () {
-                this.refs.video.videoEl.pause();
 
-                millisecond = 0;
-            });
-        }.bind(this), taskSecond - millisecond);
-
-        millisecondTimer = setTimeout(function () {
-            millisecond++;
-        }.bind(this), 1);
-        console.log('pay');
     }
 
     handlePauseVideo() {
-        clearTimeout(taskTimer);
 
-        clearTimeout(millisecondTimer);
 
-        console.log(millisecond);
     }
 
     render() {
@@ -179,13 +192,13 @@ class Index extends Component {
                     <Modal
                         centered modal dialog
                         title={this.state.video.video_title}
-                        width={1000}
+                        width={1050}
                         visible={this.state.visible}
                         onOk={this.handleCancelVideo.bind(this)}
                         onCancel={this.handleCancelVideo.bind(this)}
                     >
                         <div className="modal-main">
-                            <div>
+                            <div className="video-body">
                                 <Video
                                     ref="video"
                                     muted
@@ -197,6 +210,7 @@ class Index extends Component {
                                     <source type="video/mp4"/>
                                 </Video>
                             </div>
+                            
                         </div>
                     </Modal>
                     <Modal
@@ -209,31 +223,42 @@ class Index extends Component {
                     >
                         <div className="modal-main">
                             <div>
-                                123
+                                {
+                                    this.state.video_task && this.state.video_task.question_list && this.state.video_task.question_list.length > 0?
+                                        <div>
+                                            {
+                                                this.state.video_task.question_list.map(question => {
+                                                    return (
+                                                        <div>
+                                                            {question.question_title}
+                                                        </div>
+                                                    )
+                                                })
+                                            }
+                                        </div>
+                                        :
+                                        null
+                                }
                             </div>
                         </div>
                         <div className="modal-footer">
-                            <img className="task-qrcode" src="" alt=""/>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
-                            <div className="task-member">
-                                <div className="member-avatar"></div>
-                                <div className="member-name">user name</div>
-                            </div>
+                            {
+                                this.state.video_task && this.state.video_task.task_qrcode_url ?
+                                    <img className="task-qrcode" src={constant.host + this.state.video_task.task_qrcode_url} alt=""/>
+                                    :
+                                    null
+                            }
+                            {
+                                this.state.user_list.map((user, index) => {
+                                    return (
+                                        <div className="task-member" key={index}>
+                                            <div className="member-avatar">
+                                                <img src={user.user_avatar} alt=""/>
+                                            </div>
+                                            <div className="member-name">{user.user_name}</div>
+                                        </div>)
+                                })
+                            }
                         </div>
                     </Modal>
                 </div>

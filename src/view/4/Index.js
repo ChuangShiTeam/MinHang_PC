@@ -200,7 +200,8 @@ class Index extends Component {
                                                                         </div>
                                                                         <div className="member-name">{user.user_name}</div>
                                                                         </div>)
-                                                                })}
+                                                                    })
+                                                                }
                                                         </div>
                                                     </div>
                                                 </div>

@@ -361,3 +361,17 @@
     margin: 0 auto;
     display: block;
 }
+
+.video-master {
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 200px;
+    background-color: bisque;
+    z-index: 999;
+}
+.video-body{
+    pointer-events: none;
+
+}
