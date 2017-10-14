@@ -355,3 +355,9 @@
     text-align: center;
     margin-top: 10px;
 }
+
+.hand-print{
+    height: 700px;
+    margin: 0 auto;
+    display: block;
+}
