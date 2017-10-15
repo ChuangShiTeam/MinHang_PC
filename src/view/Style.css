@@ -10,6 +10,19 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
+.modal-main .hand-print-tip{
+    margin: 310px auto;
+    display: block;
+    text-align: center;
+    font-size: 40px;
+}
+
+
+.modal-2-main {
+    height: 1143px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
 .modal-footer {
     height: 120px;
@@ -72,7 +85,7 @@
 .public_signal {
     width: 224px;
     height: 224px;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
 }
 
 .public_signal img {
@@ -89,16 +102,17 @@
 .side .member {
     margin-top: 60px;
     color: #6d6d6d;
-    margin-left: 10px;
 }
 
 .side .member p {
     margin-bottom: 20px;
-    padding-left: 22px;
+    color: #6d6d6d;
+    text-align: center;
+    font-size: 12px;
 }
 
 .side .member li {
-    margin: 12px 0px;
+    margin: 12px 48px;
     word-wrap: normal;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -106,8 +120,8 @@
 }
 
 .member-image {
-    width: 84px;
-    height: 84px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     vertical-align: middle;
     margin-right: 22px;
@@ -179,21 +193,12 @@
 }
 
 .index-3-bg {
-    width: 2560px;
-    height: 1600px;
+    width: 1920px;
+    height: 1080px;
     margin: 0 auto;
     position: relative;
     background: url('../image/index_3_bg.png') no-repeat center;
     background-size: 100% 100%;
-}
-
-.index-3-button {
-    position: absolute;
-    top: 1199px;
-    left: 923px;
-    width: 339px;
-    height: 109px;
-    cursor: pointer;
 }
 
 .index-4-bg {
@@ -297,7 +302,7 @@
 /*index-2*/
 .index-2-bg {
     width: 1080px;
-    height: 1774px;
+    height: 1920px;
     margin: 0 auto;
     position: relative;
     background: url('../image/index_01_bg.png') no-repeat center;

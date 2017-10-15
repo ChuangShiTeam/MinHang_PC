@@ -157,7 +157,7 @@ class Index extends Component {
                     onCancel={this.handleHistoryCancel.bind(this)}
                 >
                     <Spin spinning={this.state.is_history_load}>
-                        <div className="modal-main" dangerouslySetInnerHTML={{__html: this.state.party_history.party_history_content?validate.unescapeHtml(this.state.party_history.party_history_content):null}}>
+                        <div className="modal-2-main" dangerouslySetInnerHTML={{__html: this.state.party_history.party_history_content?validate.unescapeHtml(this.state.party_history.party_history_content):null}}>
 
                         </div>
                         <div className="modal-footer">
@@ -185,7 +185,7 @@ class Index extends Component {
                     onCancel={this.handleSongCancel.bind(this)}
                 >
                     <Spin spinning={this.state.is_song_load}>
-                        <div className="modal-main">
+                        <div className="modal-2-main">
                             <div dangerouslySetInnerHTML={{__html: this.state.party_song.party_song_content?validate.unescapeHtml(this.state.party_song.party_song_content):null}}>
                             </div>
                             {
