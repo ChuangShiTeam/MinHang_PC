@@ -125,7 +125,9 @@ class Index extends Component {
 
                         this.setState({
                             timeline_event: data[i].timeline_event_list[j]
-                        });
+                        }, function () {
+                            this.handleReloadUser(this.state.timeline_event.task_id);
+                        }.bind(this));
                     } else {
                         data[i].timeline_event_list[j].is_active = false;
                     }
