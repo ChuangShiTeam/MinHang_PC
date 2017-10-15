@@ -1,4 +1,4 @@
-import React, {Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'dva';
 import {Spin} from 'antd';
 import Slider from 'react-slick';
@@ -98,7 +98,7 @@ class Index extends Component {
                     if (data[i].timeline_event_list[j].is_active) {
                         this.setState({
                             timeline_event: data[i].timeline_event_list[j]
-                        }, function() {
+                        }, function () {
                             this.handleReloadUser(this.state.timeline_event.task_id);
                         }.bind(this));
                     }
@@ -141,6 +141,7 @@ class Index extends Component {
     handleNext() {
         this.slider.slickNext();
     }
+
     handlePrevious() {
         this.slider.slickPrev();
     }
@@ -148,15 +149,15 @@ class Index extends Component {
     render() {
         return (
             <Spin spinning={this.state.is_load}>
-                <div className="index-4-bg">
+                <div className="index-4-bg" style={{'WebkitTransform': 'scale(0.25, 1.0)'}}>
                     <div className="index-4-carousel">
                         {
                             this.state.timeline_list.length > 0 ?
-                                <Slider ref={c => this.slider = c } {...{
+                                <Slider ref={c => this.slider = c} {...{
                                     infinite: true,
                                     variableWidth: true,
                                     speed: 500,
-                                    slidesToShow: 7,
+                                    slidesToShow: 5,
                                     slidesToScroll: 1,
                                     arrows: false
                                 }}>
@@ -164,44 +165,56 @@ class Index extends Component {
                                         this.state.timeline_list.map((timeline) => {
                                             return (
                                                 <div key={timeline.timeline_id} style={{width: timeline.width + "px"}}>
-                                                    <div className="timeline-item" onClick={this.handleClickTimeline.bind(this, timeline.timeline_id)}>
-                                                        <div className="timeline-item-date">{timeline.timeline_year}</div>
-                                                        <div className="timeline-item-name">{timeline.timeline_description}</div>
-                                                        <img src={constant.host + timeline.timeline_image_file.file_path} alt=""/>
+                                                    <div className="timeline-item"
+                                                         onClick={this.handleClickTimeline.bind(this, timeline.timeline_id)}>
+                                                        <div
+                                                            className="timeline-item-date">{timeline.timeline_year}</div>
+                                                        <div
+                                                            className="timeline-item-name">{timeline.timeline_description}</div>
+                                                        <img
+                                                            src={constant.host + timeline.timeline_image_file.file_path}
+                                                            alt=""/>
                                                     </div>
-                                                    <div className="timeline-event" style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
+                                                    <div className="timeline-event"
+                                                         style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
                                                         {
                                                             timeline.timeline_event_list.map((timeline_event) => {
                                                                 return (
-                                                                    <li className={timeline_event.is_active ? "active" : ""} onClick={this.handleClickEvent.bind(this, timeline.timeline_id, timeline_event.timeline_event_id)}>{timeline_event.timeline_event_title}</li>
+                                                                    <li key={timeline_event.timeline_event_id}
+                                                                        className={timeline_event.is_active ? "active" : ""}
+                                                                        onClick={this.handleClickEvent.bind(this, timeline.timeline_id, timeline_event.timeline_event_id)}>{timeline_event.timeline_event_title}</li>
                                                                 )
                                                             })
                                                         }
                                                     </div>
-                                                    <div className="timeline-event-item" style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
+                                                    <div className="timeline-event-item"
+                                                         style={{visibility: timeline.is_active ? "visible" : "hidden"}}>
                                                         <div className="timeline-event-item-main"
-                                                             dangerouslySetInnerHTML={{__html: this.state.timeline_event.timeline_event_content?validate.unescapeHtml(this.state.timeline_event.timeline_event_content):null}}>
+                                                             dangerouslySetInnerHTML={{__html: this.state.timeline_event.timeline_event_content ? validate.unescapeHtml(this.state.timeline_event.timeline_event_content) : null}}>
 
                                                         </div>
                                                         <div>
-                                                                {
-                                                                    this.state.timeline_event.task_qrcode_url?
-                                                                        <img className="task-qrcode" src={constant.host + this.state.timeline_event.task_qrcode_url} alt="" />
-                                                                        :
-                                                                        null
-                                                                }
+                                                            {
+                                                                this.state.timeline_event.task_qrcode_url ?
+                                                                    <img className="task-qrcode"
+                                                                         src={constant.host + this.state.timeline_event.task_qrcode_url}
+                                                                         alt=""/>
+                                                                    :
+                                                                    null
+                                                            }
 
-                                                                {
-                                                                    this.state.user_list.map((user, index) => {
-                                                                        return (
+                                                            {
+                                                                this.state.user_list.map((user, index) => {
+                                                                    return (
                                                                         <div className="task-member" key={index}>
-                                                                        <div className="member-avatar">
-                                                                        <img src={user.user_avatar} alt=""/>
-                                                                        </div>
-                                                                        <div className="member-name">{user.user_name}</div>
+                                                                            <div className="member-avatar">
+                                                                                <img src={user.user_avatar} alt=""/>
+                                                                            </div>
+                                                                            <div
+                                                                                className="member-name">{user.user_name}</div>
                                                                         </div>)
-                                                                    })
-                                                                }
+                                                                })
+                                                            }
                                                         </div>
                                                     </div>
                                                 </div>

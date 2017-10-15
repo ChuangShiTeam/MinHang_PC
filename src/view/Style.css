@@ -10,13 +10,13 @@
     overflow-x: hidden;
     overflow-y: auto;
 }
-.modal-main .hand-print-tip{
+
+.modal-main .hand-print-tip {
     margin: 310px auto;
     display: block;
     text-align: center;
     font-size: 40px;
 }
-
 
 .modal-2-main {
     height: 1143px;
@@ -131,11 +131,18 @@
 .index-5-bg {
     width: 2048px;
     height: 1536px;
-    margin: 0 auto;
     position: relative;
     background: url('../image/index_02_bg.png') no-repeat center;
     background-size: cover;
     position: relative;
+    -webkit-transform-origin: top left;
+    position: absolute;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    border: none;
+    overflow: hidden;
 }
 
 .index-5-main {
@@ -175,8 +182,14 @@
     width: 100%;
 }
 
+.index-5-modal-main {
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
 .index-5-main-text {
-    fonot-size: 16.6px;
+    fonot-size: 16px;
     color: #000;
     text-decoration: none;
     word-wrap: normal;
@@ -208,13 +221,14 @@
     position: relative;
     background: url('../image/index_4_bg.png') no-repeat center;
     background-size: 100% 100%;
+    -webkit-transform-origin: top left;
 }
 
 .index-4-carousel {
     position: absolute;
     left: 1320px;
     top: 300px;
-    width: 6115px;
+    width: 12000px;
     height: 814px;
 }
 
@@ -343,12 +357,12 @@
     width: 100px;
 }
 
-.task-member .member-avatar{
+.task-member .member-avatar {
     text-align: center;
     margin-top: 15px;
 }
 
-.task-member .member-avatar img{
+.task-member .member-avatar img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -361,7 +375,7 @@
     margin-top: 10px;
 }
 
-.hand-print{
+.hand-print {
     height: 700px;
     margin: 0 auto;
     display: block;
@@ -376,7 +390,8 @@
     background-color: bisque;
     z-index: 999;
 }
-.video-body{
+
+.video-body {
     pointer-events: none;
 
 }

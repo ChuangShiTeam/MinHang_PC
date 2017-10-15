@@ -168,15 +168,15 @@ class Index extends Component {
 
     render() {
         return (
-            <Spin spinning={this.state.is_load}>
-                <div className="index-5-bg">
+                <div className="index-5-bg" style={{'WebkitTransform': 'scale(0.5, 0.5)'}}>
+                    <Spin spinning={this.state.is_load}>
                     <div className="index-5-main">
                         <div className="index-5-title">课堂视频列表</div>
                         <ul className="video-li">
                             {
                                 this.state.video_list.map((video, index) => {
                                     return (
-                                        <li key={index} onClick={this.handleClickVideo.bind(this, video)}>
+                                        <li key ={index} onClick={this.handleClickVideo.bind(this, video)}>
                                             <img src={require('../../image/index_02_video.png')} alt=""/>
                                             <div className="index-5-main-text">{video.video_title}</div>
                                         </li>
@@ -190,14 +190,14 @@ class Index extends Component {
                         </div>
                     </div>
                     <Modal
-                        centered modal dialog
+                        style={{top: 50}}
                         title={this.state.video.video_title}
-                        width={1050}
+                        width={950}
                         visible={this.state.visible}
                         onOk={this.handleCancelVideo.bind(this)}
                         onCancel={this.handleCancelVideo.bind(this)}
                     >
-                        <div className="modal-main">
+                        <div className="index-5-modal-main">
                             <div className="video-body">
                                 <Video
                                     ref="video"
@@ -214,14 +214,14 @@ class Index extends Component {
                         </div>
                     </Modal>
                     <Modal
-                        centered modal dialog
+                        style={{top: 5}}
                         title="问题"
-                        width={1000}
+                        width={950}
                         visible={this.state.is_question}
                         onOk={this.handleCanceQuestion.bind(this)}
                         onCancel={this.handleCanceQuestion.bind(this)}
                     >
-                        <div className="modal-main">
+                        <div className="index-5-modal-main">
                             <div>
                                 {
                                     this.state.video_task && this.state.video_task.question_list && this.state.video_task.question_list.length > 0?
@@ -229,7 +229,7 @@ class Index extends Component {
                                             {
                                                 this.state.video_task.question_list.map(question => {
                                                     return (
-                                                        <div>
+                                                        <div key={question.question_id}>
                                                             {question.question_title}
                                                         </div>
                                                     )
@@ -261,8 +261,8 @@ class Index extends Component {
                             }
                         </div>
                     </Modal>
+                    </Spin>
                 </div>
-            </Spin>
         );
     }
 }
