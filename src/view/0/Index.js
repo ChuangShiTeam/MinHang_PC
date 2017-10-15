@@ -65,7 +65,7 @@ class Index extends Component {
             url: '/mobile/minhang/member/list',
             data: {
                 page_index: 1,
-                page_size: 7
+                page_size: 8
             },
             success: function (data) {
                 this.setState({
