@@ -68,6 +68,8 @@ class Index extends Component {
                         })
                         data[i].timeline_event_list[0].is_active = true;
                     }
+                    data[i].is_active = false;
+                    data[i].width = 1250;
                 }
                 this.setState({
                     timeline_list: data
@@ -89,9 +91,9 @@ class Index extends Component {
                 data[i].is_active = !data[i].is_active;
 
                 if (data[i].is_active) {
-                    data[i].width = 1820;
+                    data[i].width = 1250;
                 } else {
-                    data[i].width = 400;
+                    data[i].width = 1250;
                 }
 
                 for (var j = 0; j < data[i].timeline_event_list.length; j++) {
@@ -105,7 +107,7 @@ class Index extends Component {
                 }
             } else {
                 data[i].is_active = false;
-                data[i].width = 400;
+                data[i].width = 1250;
             }
         }
 
@@ -157,7 +159,7 @@ class Index extends Component {
                                     infinite: true,
                                     variableWidth: true,
                                     speed: 500,
-                                    slidesToShow: 5,
+                                    slidesToShow: 1,
                                     slidesToScroll: 1,
                                     arrows: false
                                 }}>
