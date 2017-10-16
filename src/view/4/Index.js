@@ -69,7 +69,7 @@ class Index extends Component {
                         data[i].timeline_event_list[0].is_active = true;
                     }
                     data[i].is_active = false;
-                    data[i].width = 1250;
+                    data[i].width = 1000;
                 }
                 this.setState({
                     timeline_list: data
@@ -91,9 +91,9 @@ class Index extends Component {
                 data[i].is_active = !data[i].is_active;
 
                 if (data[i].is_active) {
-                    data[i].width = 1250;
+                    data[i].width = 1000;
                 } else {
-                    data[i].width = 1250;
+                    data[i].width = 1000;
                 }
 
                 for (var j = 0; j < data[i].timeline_event_list.length; j++) {
@@ -107,7 +107,7 @@ class Index extends Component {
                 }
             } else {
                 data[i].is_active = false;
-                data[i].width = 1250;
+                data[i].width = 1000;
             }
         }
 

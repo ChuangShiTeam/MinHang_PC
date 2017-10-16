@@ -215,12 +215,11 @@
 }
 
 .index-4-bg {
-    width: 7680px;
-    height: 1080px;
+    width: 6720px;
+    height: 1050px;
     margin: 0 auto;
     position: relative;
     background: url('../image/index_4_bg.png') no-repeat center;
-    background-size: 100% 100%;
     -webkit-transform-origin: top left;
 }
 
@@ -228,7 +227,7 @@
     position: absolute;
     left: 1320px;
     top: 300px;
-    width: 6000px;
+    width: 5000px;
     height: 814px;
 }
 
@@ -277,7 +276,7 @@
 
 .timeline-event-item {
     float: left;
-    width: 530px;
+    width: 280px;
     height: 500px;
     margin-right: 20px;
     padding: 20px;
@@ -304,7 +303,7 @@
 
 .index-4-next {
     position: relative;
-    left: 7458px;
+    left: 6458px;
     top: 486px;
     width: 107px;
     height: 179px;
