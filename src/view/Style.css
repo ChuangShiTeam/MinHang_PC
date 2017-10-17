@@ -219,6 +219,7 @@
     height: 1050px;
     margin: 0 auto;
     position: relative;
+    overflow: hidden;
     background: url('../image/index_4_bg.png') no-repeat center;
     -webkit-transform-origin: top left;
 }
@@ -228,13 +229,11 @@
     left: 1320px;
     top: 300px;
     width: 5000px;
-    height: 814px;
 }
 
 .timeline-item {
     float: left;
     width: 400px;
-    height: 300px;
     font-size: 22px;
     font-weight: bold;
     cursor: pointer;
