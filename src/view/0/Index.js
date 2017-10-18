@@ -65,7 +65,7 @@ class Index extends Component {
             url: '/mobile/minhang/member/list',
             data: {
                 page_index: 1,
-                page_size: 8
+                page_size: 7
             },
             success: function (data) {
                 this.setState({
@@ -99,7 +99,7 @@ class Index extends Component {
 
     handleReloadUser() {
         http.request({
-            url: '/mobile/minhang/task/user/complete/list',
+            url: '/mobile/minhang/task/member/picture/list',
             data: {
                 task_id: this.state.poster.task_id,
                 page_index: 1,
@@ -211,7 +211,7 @@ class Index extends Component {
                                     return (
                                     <div className="task-member" key={index}>
                                         <div className="member-avatar">
-                                            <img src={user.user_avatar} alt=""/>
+                                            <img src={constant.host + user.user_avatar} alt=""/>
                                         </div>
                                         <div className="member-name">{user.user_name}</div>
                                     </div>)

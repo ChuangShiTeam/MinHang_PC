@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import {connect} from 'dva';
-import {Modal, Spin} from 'antd';
+import {Modal, Spin, Progress} from 'antd';
 
 import http from '../../util/http';
 import constant from '../../util/constant';
@@ -14,11 +14,13 @@ class Index extends Component {
             visible: false,
             is_load: false,
             is_show_task: false,
+            is_show_progress: false,
             task: {
                 task_id: '001f46fc946647efa4bccaa9735f94e6',
                 task_qrcode_url: '/upload/8acc2d49ad014f418878d1a16336c16b/001f46fc946647efa4bccaa9735f94e6.png'
             },
-            user_list: []
+            user_list: [],
+            percent: 0
         }
     }
 
@@ -77,16 +79,30 @@ class Index extends Component {
     handleShowTask() {
         if (!this.state.is_show_task) {
             this.setState({
-                is_load: true
+                is_show_progress: true
             });
             this.handleReloadUser();
+            for (let i = 1; i <= 10; i++) {
+                setTimeout(function () {
+                    this.increase();
+                }.bind(this), 200*i);
+            }
             setTimeout(function () {
                 this.setState({
                     is_show_task: true,
-                    is_load: false
+                    percent: 0,
+                    is_show_progress: false
                 });
-            }.bind(this), 1000);
+            }.bind(this), 2100);
         }
+    }
+
+    increase = () => {
+        let percent = this.state.percent + 10;
+        if (percent > 100) {
+            percent = 100;
+        }
+        this.setState({ percent });
     }
 
     render() {
@@ -102,12 +118,20 @@ class Index extends Component {
                 >
                     <Spin spinning={this.state.is_load}>
                         <div className="modal-main" onClick={this.handleShowTask.bind(this)}>
-
                             {
-                                this.state.is_show_task ?
+                                this.state.is_show_task?
                                 <img className="hand-print" src={require('../../image/handprint2.jpg')} alt=""/>
                                 :
-                                <span className="hand-print-tip">请按手印</span>
+                                <div>
+                                    {
+                                        this.state.is_show_progress ?
+                                            <div className="modal-progress">
+                                                <Progress percent={this.state.percent} />
+                                            </div>
+                                            :
+                                            <span className="hand-print-tip">请按手印</span>
+                                    }
+                                </div>
                             }
                         </div>
                         {
