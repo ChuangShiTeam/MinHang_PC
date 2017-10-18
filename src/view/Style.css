@@ -18,6 +18,12 @@
     font-size: 40px;
 }
 
+.modal-main .modal-progress {
+    margin: 310px auto;
+    display: block;
+    text-align: center;
+}
+
 .modal-2-main {
     height: 1143px;
     overflow-x: hidden;
