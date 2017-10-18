@@ -161,7 +161,7 @@ class Index extends Component {
                                     infinite: true,
                                     variableWidth: true,
                                     speed: 500,
-                                    slidesToShow: 1,
+                                    slidesToShow: 4,
                                     slidesToScroll: 1,
                                     arrows: false
                                 }}>

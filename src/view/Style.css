@@ -215,8 +215,8 @@
 }
 
 .index-4-bg {
-    width: 6720px;
-    height: 1050px;
+    width: 6912px;
+    height: 1080px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -228,7 +228,9 @@
     position: absolute;
     left: 1320px;
     top: 300px;
-    width: 5000px;
+    width: 6912px;
+    height: 500px;
+    overflow: hidden;
 }
 
 .timeline-item {
