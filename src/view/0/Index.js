@@ -26,6 +26,7 @@ class Index extends Component {
             this.handleReloadUser();
         });
         notification.on('loadMember', this, function (data) {
+            console.log('调用测试成功', data);
             this.handleReloadMember();
         });
         this.handleLoadPoster();
@@ -183,7 +184,7 @@ class Index extends Component {
                                     this.state.member_list.map((member, index) => {
                                         return (
                                             <li key={index}>
-                                                <img className="member-image" src={member.user_avatar}
+                                                <img className="member-image" src={member.user_avatar?member.user_avatar:null}
                                                      alt=""/>
                                                 <span>{member.user_name}</span>
                                             </li>)
@@ -205,13 +206,13 @@ class Index extends Component {
                              dangerouslySetInnerHTML={{__html: this.state.poster.poster_content?validate.unescapeHtml(this.state.poster.poster_content):null}}>
                         </div>
                         <div className="modal-footer">
-                            <img className="task-qrcode" src={constant.host + this.state.poster.task_qrcode_url} alt=""/>
+                            <img className="task-qrcode" src={this.state.poster.task_qrcode_url? constant.host + this.state.poster.task_qrcode_url:null} alt=""/>
                             {
                                 this.state.user_list.map((user, index) => {
                                     return (
                                     <div className="task-member" key={index}>
                                         <div className="member-avatar">
-                                            <img src={constant.host + user.user_avatar} alt=""/>
+                                            <img src={user.user_avatar? constant.host + user.user_avatar : null} alt=""/>
                                         </div>
                                         <div className="member-name">{user.user_name}</div>
                                     </div>)
