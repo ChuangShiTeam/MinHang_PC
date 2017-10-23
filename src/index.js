@@ -1,12 +1,15 @@
 import dva from "dva";
-import Router from "./router"
+import Router from "./router";
 import io from 'socket.io-client';
+import FastClick from 'fastclick';
 
 import constant from './util/constant';
 import notification from './util/notification';
 
 import "./view/Style.css";
 import 'react-html5video/dist/styles.css';
+
+FastClick.attach(document.body);
 
 window.socket = io(constant.socket);
 

@@ -221,7 +221,7 @@
 }
 
 .index-4-bg {
-    width: 6912px;
+    width: 7680px;
     height: 1080px;
     margin: 0 auto;
     position: relative;
@@ -258,7 +258,7 @@
 
 .timeline-event {
     float: left;
-    width: 300px;
+    width: 150px;
     height: 500px;
     padding: 10px 0px 10px 0px;
     color: white;
@@ -283,7 +283,7 @@
 
 .timeline-event-item {
     float: left;
-    width: 280px;
+    width: 430px;
     height: 500px;
     margin-right: 20px;
     padding: 20px;
@@ -336,6 +336,8 @@
     position: absolute;
     top: 982px;
     left: 354px;
+    width: 389px;
+    height: 137px;
     cursor: pointer;
 }
 
@@ -343,6 +345,8 @@
     position: absolute;
     top: 1227px;
     left: 354px;
+    width: 389px;
+    height: 137px;
     cursor: pointer;
 }
 

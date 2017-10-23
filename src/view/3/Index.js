@@ -1,10 +1,12 @@
-import React, {Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'dva';
 import {Modal, Spin, Progress} from 'antd';
 
 import http from '../../util/http';
 import constant from '../../util/constant';
 import notification from '../../util/notification';
+
+var isTouch = false;
 
 class Index extends Component {
     constructor(props) {
@@ -30,8 +32,19 @@ class Index extends Component {
                 this.handleReloadUser(this.state.task.task_id);
             }
         });
-        
+
+        document.body.addEventListener('touchstart', this.handleTouch.bind(this), false);
+        document.body.addEventListener('touchmove', this.handleTouch.bind(this), false);
     }
+
+    handleTouch(event) {
+        if (event.touches.length > 1 && this.state.visible && !isTouch) {
+            isTouch = true;
+            this.handleShowTask();
+        }
+
+    }
+
 
     handleReloadUser() {
         http.request({
@@ -53,7 +66,7 @@ class Index extends Component {
     }
 
     componentWillUnmount() {
-        
+
     }
 
     handleClick() {
@@ -63,6 +76,8 @@ class Index extends Component {
     }
 
     handleOk() {
+        isTouch = false;
+
         this.setState({
             visible: false,
             is_show_task: false
@@ -70,6 +85,8 @@ class Index extends Component {
     }
 
     handleCancel() {
+        isTouch = false;
+
         this.setState({
             visible: false,
             is_show_task: false
@@ -78,6 +95,7 @@ class Index extends Component {
 
     handleShowTask() {
         if (!this.state.is_show_task) {
+
             this.setState({
                 is_show_progress: true
             });
@@ -85,7 +103,7 @@ class Index extends Component {
             for (let i = 1; i <= 10; i++) {
                 setTimeout(function () {
                     this.increase();
-                }.bind(this), 200*i);
+                }.bind(this), 200 * i);
             }
             setTimeout(function () {
                 this.setState({
@@ -102,7 +120,7 @@ class Index extends Component {
         if (percent > 100) {
             percent = 100;
         }
-        this.setState({ percent });
+        this.setState({percent});
     }
 
     render() {
@@ -111,27 +129,29 @@ class Index extends Component {
                 <Modal
                     centered modal dialog
                     title='按手印'
-                    width = {1000}
+                    width={1000}
                     visible={this.state.visible}
                     onOk={this.handleOk.bind(this)}
                     onCancel={this.handleCancel.bind(this)}
                 >
                     <Spin spinning={this.state.is_load}>
-                        <div className="modal-main" onClick={this.handleShowTask.bind(this)}>
+                        <div className="modal-main">
                             {
-                                this.state.is_show_task?
-                                <img className="hand-print" src={require('../../image/handprint2.jpg')} alt=""/>
-                                :
-                                <div>
-                                    {
-                                        this.state.is_show_progress ?
-                                            <div className="modal-progress">
-                                                <Progress percent={this.state.percent} />
-                                            </div>
-                                            :
-                                            <span className="hand-print-tip">请按手印</span>
-                                    }
-                                </div>
+                                this.state.is_show_task ?
+                                    <img className="hand-print" src={require('../../image/handprint2.jpg')} alt=""/>
+                                    :
+                                    <div>
+                                        {
+                                            this.state.is_show_progress ?
+                                                <div className="modal-progress">
+                                                    <Progress percent={this.state.percent}/>
+                                                </div>
+                                                :
+                                                <span className="hand-print-tip">
+                                                    请按手印
+                                                </span>
+                                        }
+                                    </div>
                             }
                         </div>
                         {

@@ -142,10 +142,8 @@ class Index extends Component {
             <div className="index-2-bg">
                 <div className="con_but">
                     <buttom className="con_but_01" onClick={this.handleClickPartyHistory.bind(this)}>
-                        <img src={require('../../image/index_01_but01.png')} alt=""/>
                     </buttom>
                     <buttom className="con_but_02" onClick={this.handleClickPartySong.bind(this)}>
-                        <img src={require('../../image/index_01_but02.png')} alt=""/>
                     </buttom>
                 </div>
                 <Modal

@@ -153,7 +153,7 @@ class Index extends Component {
     render() {
         return (
             <Spin spinning={this.state.is_load}>
-                <div className="index-4-bg" style={{'WebkitTransform': 'scale(0.25, 1.0)'}}>
+                <div className="index-4-bg" style={{'WebkitTransform': 'scale(0.5, 0.5)'}}>
                     <div className="index-4-carousel">
                         {
                             this.state.timeline_list.length > 0 ?
