@@ -22,7 +22,8 @@ class Index extends Component {
                 task_qrcode_url: '/upload/8acc2d49ad014f418878d1a16336c16b/001f46fc946647efa4bccaa9735f94e6.png'
             },
             user_list: [],
-            percent: 0
+            percent: 0,
+            handleImageIndex: 0
         }
     }
 
@@ -97,7 +98,8 @@ class Index extends Component {
         if (!this.state.is_show_task) {
 
             this.setState({
-                is_show_progress: true
+                is_show_progress: true,
+                handleImageIndex: this.handleGetRandomNum(0, 4)
             });
             this.handleReloadUser();
             for (let i = 1; i <= 10; i++) {
@@ -123,6 +125,12 @@ class Index extends Component {
         this.setState({percent});
     }
 
+    handleGetRandomNum(Min, Max) {
+        var Range = Max - Min;
+        var Rand = Math.random();
+        return (Min + Math.round(Rand * Range));
+    }
+
     render() {
         return (
             <div className="index-3-bg" onClick={this.handleClick.bind(this)}>
@@ -138,20 +146,20 @@ class Index extends Component {
                         <div className="modal-main">
                             {
                                 this.state.is_show_task ?
-                                    <img className="hand-print" src={require('../../image/handprint2.jpg')} alt=""/>
-                                    :
-                                    <div>
-                                        {
-                                            this.state.is_show_progress ?
-                                                <div className="modal-progress">
-                                                    <Progress percent={this.state.percent}/>
-                                                </div>
-                                                :
-                                                <span className="hand-print-tip">
+                                <img className="hand-print" src={require('../../image/handprint' + this.state.handleImageIndex + '.jpg')} alt=""/>
+                                :
+                                <div>
+                                {
+                                    this.state.is_show_progress ?
+                                        <div className="modal-progress">
+                                            <Progress percent={this.state.percent}/>
+                                        </div>
+                                        :
+                                        <span className="hand-print-tip">
                                                     请按手印
                                                 </span>
-                                        }
-                                    </div>
+                                }
+                                </div>
                             }
                         </div>
                         {

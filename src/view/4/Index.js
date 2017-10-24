@@ -152,6 +152,7 @@ class Index extends Component {
 
     render() {
         return (
+            <div className="index-4-div">
             <Spin spinning={this.state.is_load}>
                 <div className="index-4-bg" style={{'WebkitTransform': 'scale(0.5, 0.5)'}}>
                     <div className="index-4-carousel">
@@ -200,7 +201,7 @@ class Index extends Component {
                                                         <div>
                                                             {
                                                                 this.state.timeline_event.task_qrcode_url ?
-                                                                    <img className="task-qrcode"
+                                                                    <img className="task-qrcode-2"
                                                                          src={constant.host + this.state.timeline_event.task_qrcode_url}
                                                                          alt=""/>
                                                                     :
@@ -234,6 +235,7 @@ class Index extends Component {
                     <div className="index-4-next" onClick={this.handleNext.bind(this)}></div>
                 </div>
             </Spin>
+            </div>
         );
     }
 }

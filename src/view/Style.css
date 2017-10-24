@@ -220,12 +220,17 @@
     background-size: 100% 100%;
 }
 
+.index-4-div {
+    width: 100%;
+    height: 540px;
+    overflow: hidden;
+}
+
 .index-4-bg {
     width: 7680px;
     height: 1080px;
     margin: 0 auto;
     position: relative;
-    overflow: hidden;
     background: url('../image/index_4_bg.png') no-repeat center;
     -webkit-transform-origin: top left;
 }
@@ -293,7 +298,8 @@
 }
 
 .timeline-event-item-main {
-    height: 360px;
+    height: 320px;
+    margin-bottom: 20px;
     overflow-y: auto;
 }
 
@@ -358,6 +364,14 @@
     float: left;
     width: 110px;
     height: 110px;
+    background-color: #ffffff;
+    margin-right: 20px;
+}
+
+.task-qrcode-2 {
+    float: left;
+    width: 130px;
+    height: 130px;
     background-color: #ffffff;
     margin-right: 20px;
 }
