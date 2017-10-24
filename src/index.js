@@ -8,6 +8,8 @@ import notification from './util/notification';
 
 import "./view/Style.css";
 import 'react-html5video/dist/styles.css';
+import './css/slick.min.css';
+import './css/slick-theme.min.css';
 
 FastClick.attach(document.body);
 
