@@ -98,7 +98,8 @@ class Index extends Component {
                 video_task: video_task_list[0],
                 visible: true
             }, function () {
-                this.refs.video.videoEl.src = this.state.video.video_url;
+                // this.refs.video.videoEl.src = this.state.video.video_url;
+                this.refs.video.videoEl.src = require('../../video/' + this.state.video.video_url + '.mp4');
                 taskTimer = setTimeout(function () {
                     this.refs.video.videoEl.pause();
                     this.setState({
@@ -177,7 +178,13 @@ class Index extends Component {
                                 this.state.video_list.map((video, index) => {
                                     return (
                                         <li key ={index} onClick={this.handleClickVideo.bind(this, video)}>
-                                            <img src={require('../../image/index_02_video.png')} alt=""/>
+                                            {
+                                                video.file_path ?
+                                                    <img src={constant.host + video.file_path} style={{width: '240px', height: '150px'}} alt=""/>
+                                                    :
+                                                    <img src={require('../../image/index_02_video.png')} style={{width: '240px', height: '150px'}} alt=""/>
+
+                                            }
                                             <div className="index-5-main-text">{video.video_title}</div>
                                         </li>
                                     )
@@ -201,7 +208,6 @@ class Index extends Component {
                             <div className="video-body">
                                 <Video
                                     ref="video"
-                                    muted
                                     controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
                                     poster=""
                                     onPlay = {this.handlePayVideo.bind(this)}
