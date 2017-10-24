@@ -72,5 +72,7 @@
 
 <script>
     var webFrame = require('electron').webFrame;
-    webFrame.setZoomLevelLimits(1, 1);
+    if (webFrame) {
+        webFrame.setZoomLevelLimits(1, 1);
+    }
 </script>
