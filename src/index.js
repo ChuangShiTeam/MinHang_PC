@@ -21,7 +21,7 @@ window.socket.on('connect', function () {
     }, function (response) {
         if (response.code === 200) {
             window.socket.on('receiveMessage', function (data) {
-                notification.emit(data.data.action, {});
+                notification.emit(data.data.action, {content: data.content});
             });
         }
     });

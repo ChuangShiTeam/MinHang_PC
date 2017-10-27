@@ -12,10 +12,16 @@
 }
 
 .modal-main .hand-print-tip {
-    margin: 310px auto;
+     margin: 310px auto;
+     display: block;
+     text-align: center;
+     font-size: 40px;
+}
+.modal-main .hand-print-tip .hand-print-min-tip {
+    margin: 5px auto;
     display: block;
     text-align: center;
-    font-size: 40px;
+    font-size: 20px;
 }
 
 .modal-main .modal-progress {

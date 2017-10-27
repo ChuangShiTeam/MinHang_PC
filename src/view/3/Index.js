@@ -5,6 +5,7 @@ import {Modal, Spin, Progress} from 'antd';
 import http from '../../util/http';
 import constant from '../../util/constant';
 import notification from '../../util/notification';
+import storage from '../../util/storage';
 
 var isTouch = false;
 
@@ -15,6 +16,7 @@ class Index extends Component {
         this.state = {
             visible: false,
             is_load: false,
+            is_scan_qrcode: false,
             is_show_task: false,
             is_show_progress: false,
             task: {
@@ -29,8 +31,8 @@ class Index extends Component {
 
     componentDidMount() {
         notification.on('loadHandlePrint', this, function (data) {
-            if (this.state.task && this.state.task.task_id) {
-                this.handleReloadUser(this.state.task.task_id);
+            if (this.state.task && this.state.task.task_id && this.state.visible) {
+                this.handleReloadUser(data.content);
             }
         });
 
@@ -39,7 +41,7 @@ class Index extends Component {
     }
 
     handleTouch(event) {
-        if (event.touches.length > 1 && this.state.visible && !isTouch) {
+        if (event.touches.length > 1 && this.state.visible && this.state.is_scan_qrcode && !isTouch) {
             isTouch = true;
             this.handleShowTask();
         }
@@ -47,23 +49,32 @@ class Index extends Component {
     }
 
 
-    handleReloadUser() {
-        http.request({
-            url: '/mobile/minhang/task/user/complete/list',
-            data: {
-                task_id: this.state.task.task_id,
-                page_index: 1,
-                page_size: 8
-            },
-            success: function (data) {
-                this.setState({
-                    user_list: data
-                });
-            }.bind(this),
-            complete: function () {
-
-            }.bind(this)
+    handleReloadUser(token) {
+        this.setState({
+            is_load: true
         });
+        if (token) {
+            storage.setToken(token);
+            http.request({
+                url: '/mobile/minhang/task/user/complete/list',
+                data: {
+                    task_id: this.state.task.task_id,
+                    page_index: 1,
+                    page_size: 8
+                },
+                success: function (data) {
+                    this.setState({
+                        user_list: data,
+                        is_scan_qrcode: true
+                    });
+                }.bind(this),
+                complete: function () {
+                    this.setState({
+                        is_load: false
+                    });
+                }.bind(this)
+            });
+        }
     }
 
     componentWillUnmount() {
@@ -78,6 +89,7 @@ class Index extends Component {
 
     handleOk() {
         isTouch = false;
+        storage.setToken(null);
 
         this.setState({
             visible: false,
@@ -87,7 +99,7 @@ class Index extends Component {
 
     handleCancel() {
         isTouch = false;
-
+        storage.setToken(null);
         this.setState({
             visible: false,
             is_show_task: false
@@ -101,7 +113,6 @@ class Index extends Component {
                 is_show_progress: true,
                 handleImageIndex: this.handleGetRandomNum(0, 4)
             });
-            this.handleReloadUser();
             for (let i = 1; i <= 10; i++) {
                 setTimeout(function () {
                     this.increase();
@@ -145,44 +156,54 @@ class Index extends Component {
                     <Spin spinning={this.state.is_load}>
                         <div className="modal-main">
                             {
-                                this.state.is_show_task ?
-                                <img className="hand-print" src={require('../../image/handprint' + this.state.handleImageIndex + '.jpg')} alt=""/>
-                                :
-                                <div>
-                                {
-                                    this.state.is_show_progress ?
-                                        <div className="modal-progress">
-                                            <Progress percent={this.state.percent}/>
-                                        </div>
-                                        :
+                                this.state.is_scan_qrcode ?
+                                    <div>
+                                        {
+                                            this.state.is_show_task ?
+                                                <div>
+                                                    <img className="hand-print" src={require('../../image/handprint' + this.state.handleImageIndex + '.jpg')} alt=""/>
+                                                </div>
+                                                :
+                                                <div>
+                                                    {
+                                                        this.state.is_show_progress ?
+                                                            <div className="modal-progress">
+                                                                <Progress percent={this.state.percent}/>
+                                                            </div>
+                                                            :
+                                                            <span className="hand-print-tip">
+                                                                请按手印
+                                                            </span>
+                                                    }
+                                                </div>
+                                        }
+                                    </div>
+                                    :
+                                    <div>
                                         <span className="hand-print-tip">
-                                                    请按手印
-                                                </span>
-                                }
-                                </div>
+                                            扫描二维码
+                                            <span className="hand-print-min-tip">
+                                            (请打开手机进入党建中心点击信念之钥在按手印处点击扫描)
+                                            </span>
+                                        </span>
+                                    </div>
                             }
                         </div>
-                        {
-                            this.state.is_show_task ?
-                                <div className="modal-footer">
-                                    <img className="task-qrcode"
-                                         src={constant.host + this.state.task.task_qrcode_url} alt=""/>
-                                    {
-                                        this.state.user_list.map((user, index) => {
-                                            return (
-                                                <div className="task-member" key={index}>
-                                                    <div className="member-avatar">
-                                                        <img src={user.user_avatar} alt=""/>
-                                                    </div>
-                                                    <div className="member-name">{user.user_name}</div>
-                                                </div>)
-                                        })
-                                    }
-                                </div>
-                                :
-                                <div style={{height: '120px'}}>
-                                </div>
-                        }
+                        <div className="modal-footer">
+                            <img className="task-qrcode"
+                                 src={'http://api.chuangshi.nowui.com' + this.state.task.task_qrcode_url} alt=""/>
+                            {
+                                this.state.user_list.map((user, index) => {
+                                    return (
+                                        <div className="task-member" key={index}>
+                                            <div className="member-avatar">
+                                                <img src={user.user_avatar} alt=""/>
+                                            </div>
+                                            <div className="member-name">{user.user_name}</div>
+                                        </div>)
+                                })
+                            }
+                        </div>
                     </Spin>
                 </Modal>
             </div>

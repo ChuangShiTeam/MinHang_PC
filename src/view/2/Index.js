@@ -188,7 +188,7 @@ class Index extends Component {
                             </div>
                             {
                                 this.state.party_song.party_song_url?
-                                    <audio src={this.state.party_song.party_song_url}controls="controls">
+                                    <audio src={this.state.party_song.party_song_url} controls="controls">
                                     </audio>:null
                             }
                         </div>

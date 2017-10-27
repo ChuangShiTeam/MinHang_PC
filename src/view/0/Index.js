@@ -6,6 +6,7 @@ import notification from '../../util/notification';
 import http from '../../util/http';
 import constant from '../../util/constant';
 import validate from '../../util/validate';
+import QueueAnim from 'rc-queue-anim';
 
 class Index extends Component {
     constructor(props) {
@@ -59,9 +60,6 @@ class Index extends Component {
     }
 
     handleReloadMember() {
-        this.setState({
-            is_load: true
-        });
         http.request({
             url: '/mobile/minhang/member/list',
             data: {
@@ -74,9 +72,7 @@ class Index extends Component {
                 });
             }.bind(this),
             complete: function () {
-                this.setState({
-                    is_load: false
-                });
+
             }.bind(this)
         });
     }
@@ -210,12 +206,15 @@ class Index extends Component {
                             {
                                 this.state.user_list.map((user, index) => {
                                     return (
-                                    <div className="task-member" key={index}>
-                                        <div className="member-avatar">
-                                            <img src={user.user_avatar? constant.host + user.user_avatar : null} alt=""/>
-                                        </div>
-                                        <div className="member-name">{user.user_name}</div>
-                                    </div>)
+                                        <QueueAnim delay={[0, 300]} type="scale">
+                                            <div className="task-member" key={index}>
+                                                <div className="member-avatar">
+                                                    <img src={user.user_avatar? constant.host + user.user_avatar : null} alt=""/>
+                                                </div>
+                                                <div className="member-name">{user.user_name}</div>
+                                            </div>
+                                        </QueueAnim>
+                                    )
                                 })
                             }
                         </div>
