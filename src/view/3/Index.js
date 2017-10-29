@@ -40,13 +40,13 @@ class Index extends Component {
                     is_show_task: false,
                     is_show_progress: false,
                     is_complete_task: false,
-                    user_list: [],
                     percent: 0,
                     handleImageIndex: 0
                 });
-                this.handleReloadUser(data.content);
+                this.handleStartTask(data.content);
             }
         });
+        this.handleReloadUser(this.state.task.task_id);
 
         document.body.addEventListener('touchstart', this.handleTouch.bind(this), false);
         document.body.addEventListener('touchmove', this.handleTouch.bind(this), false);
@@ -60,8 +60,7 @@ class Index extends Component {
 
     }
 
-
-    handleReloadUser(token) {
+    handleStartTask(token) {
         this.setState({
             is_load: true
         });
@@ -71,10 +70,7 @@ class Index extends Component {
                 url: '/mobile/minhang/task/user/find',
                 data: {},
                 success: function (data) {
-                    let user_list = [];
-                    user_list.push(data);
                     this.setState({
-                        user_list: user_list,
                         is_scan_qrcode: true
                     });
                 }.bind(this),
@@ -85,6 +81,25 @@ class Index extends Component {
                 }.bind(this)
             });
         }
+    }
+
+    handleReloadUser(task_id) {
+        http.request({
+            url: '/mobile/minhang/task/user/complete/list',
+            data: {
+                task_id: task_id,
+                page_index: 1,
+                page_size: 8
+            },
+            success: function (data) {
+                this.setState({
+                    user_list: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }.bind(this)
+        });
     }
 
     componentWillUnmount() {
@@ -107,7 +122,6 @@ class Index extends Component {
             is_show_task: false,
             is_show_progress: false,
             is_complete_task: false,
-            user_list: [],
             percent: 0,
             handleImageIndex: 0
         });
@@ -122,7 +136,6 @@ class Index extends Component {
             is_show_task: false,
             is_show_progress: false,
             is_complete_task: false,
-            user_list: [],
             percent: 0,
             handleImageIndex: 0
         });
@@ -196,6 +209,10 @@ class Index extends Component {
                     action: 'loadKey',
                     content: ''
                 });
+                this.setState({
+                    is_complete_task: true
+                });
+                this.handleReloadUser(this.state.task.task_id);
             }.bind(this),
             complete: function () {
                 this.setState({
@@ -259,9 +276,6 @@ class Index extends Component {
                                     <div>
                                         <span className="hand-print-tip">
                                             扫描二维码
-                                            <span className="hand-print-min-tip">
-                                            (请打开手机进入党建中心点击信念之钥在按手印处点击扫描)
-                                            </span>
                                         </span>
                                     </div>
                             }

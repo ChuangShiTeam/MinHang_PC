@@ -17,12 +17,6 @@
      text-align: center;
      font-size: 40px;
 }
-.modal-main .hand-print-tip .hand-print-min-tip {
-    margin: 5px auto;
-    display: block;
-    text-align: center;
-    font-size: 20px;
-}
 
 .modal-main .modal-progress {
     margin: 310px auto;
@@ -34,6 +28,13 @@
     height: 1143px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.modal-audio {
+    position: absolute;
+    z-index: 9;
+    top: 1060px;
+    width: 100%;
 }
 
 .modal-footer {
@@ -332,12 +333,21 @@
 }
 
 /*index-2*/
-.index-2-bg {
+.index-2-bg-1 {
     width: 1080px;
     height: 1920px;
     margin: 0 auto;
     position: relative;
-    background: url('../image/index_01_bg.png') no-repeat center;
+    background: url('../image/index_01_bg-1.png') no-repeat center;
+    background-size: 100% 100%;
+}
+
+.index-2-bg-2 {
+    width: 1080px;
+    height: 1920px;
+    margin: 0 auto;
+    position: relative;
+    background: url('../image/index_01_bg-2.png') no-repeat center;
     background-size: 100% 100%;
 }
 
@@ -346,19 +356,52 @@
 
 .con_but_01 {
     position: absolute;
-    top: 982px;
-    left: 354px;
-    width: 389px;
-    height: 137px;
+    z-index: 9;
+    top: 470px;
+    left: 200px;
+    background: url('../image/index_01_but01.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 300px;
+    height: 100px;
     cursor: pointer;
 }
 
 .con_but_02 {
     position: absolute;
-    top: 1227px;
-    left: 354px;
-    width: 389px;
-    height: 137px;
+    z-index: 8;
+    top: 470px;
+    left: 580px;
+    background: url('../image/index_01_but02.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 300px;
+    height: 100px;
+    cursor: pointer;
+}
+.page_but {
+
+}
+
+.page_but_01 {
+    position: absolute;
+    z-index: 10;
+    top: 1700px;
+    left: 490px;
+    background: url('../image/index_01_but04.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.page_but_02 {
+    position: absolute;
+    z-index: 11;
+    top: 1700px;
+    left: 490px;
+    background: url('../image/index_01_but03.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 100px;
+    height: 50px;
     cursor: pointer;
 }
 
@@ -413,6 +456,7 @@
 .hand-print-upload {
     margin: 20px auto;
     display: block;
+    text-align: center;
 }
 
 .video-master {
@@ -429,3 +473,6 @@
     pointer-events: none;
 
 }
+
+
+

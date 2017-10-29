@@ -6,12 +6,14 @@ import http from '../../util/http';
 import validate from '../../util/validate';
 import constant from '../../util/constant';
 import notification from '../../util/notification';
+import BasicSoundPlayer from '../sound_player/BasicSoundPlayer';
 
 class Index extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            is_show: 'history',
             historyVisible: false,
             is_history_load: false,
             party_history: {},
@@ -38,6 +40,12 @@ class Index extends Component {
 
     componentWillUnmount() {
         
+    }
+
+    handleChange() {
+        this.setState({
+            is_show: this.state.is_show === 'history'?'song':'history'
+        });
     }
 
     handleReloadUser(task_id) {
@@ -137,18 +145,75 @@ class Index extends Component {
         });
     }
 
+    prevSong() {
+        let party_song_id = this.state.party_song.party_song_id;
+        this.setState({
+            is_song_load: true,
+            party_song: {}
+        });
+        http.request({
+            url: '/mobile/minhang/party/song/prev',
+            data: {
+                party_song_id: party_song_id
+            },
+            success: function (data) {
+                this.setState({
+                    party_song: data
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_song_load: false
+                });
+            }.bind(this)
+        });
+    }
+
+    nextSong() {
+        let party_song_id = this.state.party_song.party_song_id;
+        this.setState({
+            is_song_load: true,
+            party_song: {}
+        });
+        http.request({
+            url: '/mobile/minhang/party/song/next',
+            data: {
+                party_song_id: party_song_id
+            },
+            success: function (data) {
+                this.setState({
+                    party_song: data
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_song_load: false
+                });
+            }.bind(this)
+        });
+    }
+
     render() {
+        
         return (
-            <div className="index-2-bg">
+            <div className={this.state.is_show === 'history' ? 'index-2-bg-1': 'index-2-bg-2'}>
                 <div className="con_but">
                     <buttom className="con_but_01" onClick={this.handleClickPartyHistory.bind(this)}>
                     </buttom>
                     <buttom className="con_but_02" onClick={this.handleClickPartySong.bind(this)}>
                     </buttom>
                 </div>
+                <div className="page_but">
+                    <buttom className={this.state.is_show === 'history' ? 'page_but_01': 'page_but_02'} onClick={this.handleChange.bind(this)}>
+                    </buttom>
+                </div>
                 <Modal
                     centered modal dialog
-                    title='朗读党史'
+                    title='红色诗词'
                     width = {1000}
                     visible={this.state.historyVisible}
                     onOk={this.handleHistoryOk.bind(this)}
@@ -176,7 +241,7 @@ class Index extends Component {
                 </Modal>
                 <Modal
                     centered modal dialog
-                    title='跟唱党歌'
+                    title='红色歌曲'
                     width = {1000}
                     visible={this.state.songVisible}
                     onOk={this.handleSongOk.bind(this)}
@@ -186,11 +251,20 @@ class Index extends Component {
                         <div className="modal-2-main">
                             <div dangerouslySetInnerHTML={{__html: this.state.party_song.party_song_content?validate.unescapeHtml(this.state.party_song.party_song_content):null}}>
                             </div>
-                            {
-                                this.state.party_song.party_song_url?
-                                    <audio src={this.state.party_song.party_song_url} controls="controls">
-                                    </audio>:null
-                            }
+                            <div className="modal-audio">
+                                {
+                                    this.state.party_song.party_song_url?
+                                        <BasicSoundPlayer
+                                            trackTitle="红色歌曲"
+                                            prevIndex={this.prevSong.bind(this)}
+                                            nextIndex={this.nextSong.bind(this)}
+                                            streamUrl={this.state.party_song.party_song_url}
+                                        />
+                                        :
+                                        null
+
+                                }
+                            </div>
                         </div>
                         <div className="modal-footer">
                             <img className="task-qrcode" src={constant.host + this.state.party_song.task_qrcode_url} alt=""/>

@@ -10,7 +10,9 @@ import "./view/Style.css";
 import 'react-html5video/dist/styles.css';
 import './css/slick.min.css';
 import './css/slick-theme.min.css';
-
+import './view/sound_player/main.css';
+import 'highlight.js/styles/github.css';
+import 'basscss/css/basscss.css';
 FastClick.attach(document.body);
 
 window.socket = io(constant.socket);
