@@ -90,8 +90,8 @@
 .side {
     position: absolute;
     top: 93px;
-    right: 93px;
-    width: 224px;
+    right: 40px;
+    width: 245px;
 }
 
 .public_signal {
@@ -406,8 +406,12 @@
 }
 
 .hand-print {
-    height: 700px;
+    height: 600px;
     margin: 0 auto;
+    display: block;
+}
+.hand-print-upload {
+    margin: 20px auto;
     display: block;
 }
 

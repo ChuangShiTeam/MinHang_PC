@@ -15,6 +15,7 @@ class Index extends Component {
         this.state = {
             visible: false,
             is_load: false,
+            is_queue_anim: false,
             poster: {},
             poster_list: [],
             user_list: [],
@@ -27,7 +28,10 @@ class Index extends Component {
             this.handleReloadUser();
         });
         notification.on('loadMember', this, function (data) {
-            console.log('调用测试成功', data);
+            this.setState({
+                is_queue_anim: false
+            });
+
             this.handleReloadMember();
         });
         this.handleLoadPoster();
@@ -68,7 +72,8 @@ class Index extends Component {
             },
             success: function (data) {
                 this.setState({
-                    member_list: data
+                    member_list: data,
+                    is_queue_anim: true
                 });
             }.bind(this),
             complete: function () {
@@ -170,22 +175,28 @@ class Index extends Component {
 
                     <div className="side">
                         <div className="public_signal">
-                            <img src={require('../../image/code_img_00.jpg')} alt=""/>
-                            <p>扫二维码关注公众号</p>
+
                         </div>
                         <div className="member">
-                            <p>登陆成功的党员</p>
                             <ul>
                                 {
-                                    this.state.member_list.map((member, index) => {
-                                        return (
-                                            <li key={index}>
-                                                <img className="member-image" src={member.user_avatar?member.user_avatar:null}
-                                                     alt=""/>
-                                                <span>{member.user_name}</span>
-                                            </li>)
-                                    })
+                                    this.state.is_queue_anim?
+                                        <QueueAnim delay={[0, 300]} type="scale">
+                                            {
+                                                this.state.member_list.map((member, index) => {
+                                                    return (
+                                                        <li key={index}>
+                                                            <img className="member-image" src={member.user_avatar?member.user_avatar:null}
+                                                                 alt=""/>
+                                                            <span>{member.user_name}</span>
+                                                        </li>)
+                                                })
+                                            }
+                                        </QueueAnim>
+                                        :
+                                        null
                                 }
+
                             </ul>
                         </div>
                     </div>
@@ -206,14 +217,13 @@ class Index extends Component {
                             {
                                 this.state.user_list.map((user, index) => {
                                     return (
-                                        <QueueAnim delay={[0, 300]} type="scale">
+
                                             <div className="task-member" key={index}>
                                                 <div className="member-avatar">
                                                     <img src={user.user_avatar? constant.host + user.user_avatar : null} alt=""/>
                                                 </div>
                                                 <div className="member-name">{user.user_name}</div>
                                             </div>
-                                        </QueueAnim>
                                     )
                                 })
                             }

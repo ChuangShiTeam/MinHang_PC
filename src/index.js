@@ -20,8 +20,17 @@ window.socket.on('connect', function () {
         id: constant.id
     }, function (response) {
         if (response.code === 200) {
+            notification.on('sendMessage', this, function (data) {
+                window.socket.emit('sendMessage', {
+                    targetId: data.targetId,
+                    action: data.action,
+                    content: data.content
+                }, function (response) {
+
+                });
+            });
             window.socket.on('receiveMessage', function (data) {
-                notification.emit(data.data.action, {content: data.content});
+                notification.emit(data.data.action, {content: data.data.content});
             });
         }
     });

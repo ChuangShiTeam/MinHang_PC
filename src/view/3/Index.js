@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'dva';
-import {Modal, Spin, Progress} from 'antd';
+import {Modal, Spin, Progress, Button} from 'antd';
 
 import http from '../../util/http';
 import constant from '../../util/constant';
@@ -19,6 +19,7 @@ class Index extends Component {
             is_scan_qrcode: false,
             is_show_task: false,
             is_show_progress: false,
+            is_complete_task: false,
             task: {
                 task_id: '001f46fc946647efa4bccaa9735f94e6',
                 task_qrcode_url: '/upload/8acc2d49ad014f418878d1a16336c16b/001f46fc946647efa4bccaa9735f94e6.png'
@@ -32,6 +33,17 @@ class Index extends Component {
     componentDidMount() {
         notification.on('loadHandlePrint', this, function (data) {
             if (this.state.task && this.state.task.task_id && this.state.visible) {
+                isTouch = false;
+                storage.setToken('');
+                this.setState({
+                    is_scan_qrcode: false,
+                    is_show_task: false,
+                    is_show_progress: false,
+                    is_complete_task: false,
+                    user_list: [],
+                    percent: 0,
+                    handleImageIndex: 0
+                });
                 this.handleReloadUser(data.content);
             }
         });
@@ -56,15 +68,13 @@ class Index extends Component {
         if (token) {
             storage.setToken(token);
             http.request({
-                url: '/mobile/minhang/task/user/complete/list',
-                data: {
-                    task_id: this.state.task.task_id,
-                    page_index: 1,
-                    page_size: 8
-                },
+                url: '/mobile/minhang/task/user/find',
+                data: {},
                 success: function (data) {
+                    let user_list = [];
+                    user_list.push(data);
                     this.setState({
-                        user_list: data,
+                        user_list: user_list,
                         is_scan_qrcode: true
                     });
                 }.bind(this),
@@ -89,20 +99,32 @@ class Index extends Component {
 
     handleOk() {
         isTouch = false;
-        storage.setToken(null);
+        storage.setToken('');
 
         this.setState({
             visible: false,
-            is_show_task: false
+            is_scan_qrcode: false,
+            is_show_task: false,
+            is_show_progress: false,
+            is_complete_task: false,
+            user_list: [],
+            percent: 0,
+            handleImageIndex: 0
         });
     }
 
     handleCancel() {
         isTouch = false;
-        storage.setToken(null);
+        storage.setToken('');
         this.setState({
             visible: false,
-            is_show_task: false
+            is_scan_qrcode: false,
+            is_show_task: false,
+            is_show_progress: false,
+            is_complete_task: false,
+            user_list: [],
+            percent: 0,
+            handleImageIndex: 0
         });
     }
 
@@ -142,6 +164,47 @@ class Index extends Component {
         return (Min + Math.round(Rand * Range));
     }
 
+    handleUploadHandPrint() {
+        this.setState({
+            is_load: true
+        });
+        let file_id = '';
+        if (this.state.handleImageIndex === 0) {
+            file_id = '88d51dde1b7e461f9dbd3852a9399d8b';
+        } else if (this.state.handleImageIndex === 1) {
+            file_id = '72eadb2e4a224e6187a09e71fe6d423f';
+        } else if (this.state.handleImageIndex === 2) {
+            file_id = '214c5331b9e847c887a5c6af22d7c90a';
+        } else if (this.state.handleImageIndex === 3) {
+            file_id = '811e74875187456d902acac09f4d9f78';
+        } else if (this.state.handleImageIndex === 4) {
+            file_id = '00377686aeea42c1be19415fca9182bc';
+        }
+        http.request({
+            url: '/mobile/minhang/task/member/complete',
+            data: {
+                task_id: this.state.task.task_id,
+                member_picture: {
+                    picture_file: file_id
+                },
+                key_activated_step: 2,
+                member_task_type: 'HAND_PRINT_PICTURE'
+            },
+            success: function (data) {
+                notification.emit('sendMessage', {
+                    targetId: storage.getToken(),
+                    action: 'loadKey',
+                    content: ''
+                });
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_load: false
+                });
+            }.bind(this)
+        });
+    }
+
     render() {
         return (
             <div className="index-3-bg" onClick={this.handleClick.bind(this)}>
@@ -162,6 +225,20 @@ class Index extends Component {
                                             this.state.is_show_task ?
                                                 <div>
                                                     <img className="hand-print" src={require('../../image/handprint' + this.state.handleImageIndex + '.jpg')} alt=""/>
+                                                    {
+                                                        this.state.is_complete_task ?
+                                                            <div className="hand-print-upload">
+                                                                上传手印成功
+                                                            </div>
+                                                            :
+                                                            <Button type="danger"
+                                                                    icon="uplaod"
+                                                                    size="large"
+                                                                    onClick={this.handleUploadHandPrint.bind(this)}
+                                                                    className="hand-print-upload">
+                                                                上传手印
+                                                            </Button>
+                                                    }
                                                 </div>
                                                 :
                                                 <div>
