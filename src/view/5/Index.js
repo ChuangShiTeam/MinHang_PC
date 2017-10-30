@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Pagination} from 'antd';
 import {connect} from 'dva';
-import {Modal, Spin} from 'antd';
+import {Modal, Spin, Button} from 'antd';
 import {DefaultPlayer as Video} from 'react-html5video';
 import http from '../../util/http';
 import notification from '../../util/notification';
@@ -24,7 +24,6 @@ class Index extends Component {
             video: {},
             video_task_list: [],
             video_task: {},
-            video_task_list_index: 0,
             user_list: [],
             is_load: false
         }
@@ -38,6 +37,7 @@ class Index extends Component {
         });
         let page_index = this.state.page_index;
         this.handleLoadVideo(page_index);
+
     }
 
     componentWillUnmount() {
@@ -94,20 +94,12 @@ class Index extends Component {
             this.setState({
                 video: video,
                 video_task_list: video_task_list,
-                video_task_list_index: 0,
                 video_task: video_task_list[0],
                 visible: true
             }, function () {
                 // this.refs.video.videoEl.src = this.state.video.video_url;
                 this.refs.video.videoEl.src = require('../../video/' + this.state.video.video_url + '.mp4');
-                taskTimer = setTimeout(function () {
-                    this.refs.video.videoEl.pause();
-                    this.setState({
-                        is_question: true
-                    }, function() {
-                        this.handleReloadUser(this.state.video_task.task_id);
-                    }.bind(this));
-                }.bind(this), video_task_list[0].video_task_time * 1000);
+                console.log('this.refs.video', this.refs.video);
                 this.refs.video.videoEl.play();
             }.bind(this));
         }
@@ -115,40 +107,28 @@ class Index extends Component {
 
     handleCancelVideo() {
         this.refs.video.videoEl.pause();
-        clearTimeout(taskTimer);
         this.setState({
             video: {},
             video_task_list: [],
             video_task:{},
-            video_task_list_index: 0,
             user_list: [],
             visible: false
         });
     }
 
-    handleCanceQuestion() {
-        this.refs.video.videoEl.play();
-        let {video_task_list, video_task_list_index, video_task} = this.state;
-        if ((video_task_list_index + 1) < video_task_list.length) {
-            taskTimer = setTimeout(function () {
-                this.refs.video.videoEl.pause();
-                this.setState({
-                    is_question: true,
-                    video_task_list_index: this.state.video_task_list_index + 1 ,
-                    video_task: this.state.video_task_list[this.state.video_task_list_index + 1]
-                }, function() {
-                    this.handleReloadUser(this.state.video_task.task_id);
-                }.bind(this));
-            }.bind(this), (video_task_list[video_task_list_index + 1].video_task_time - video_task.video_task_time) * 1000);
-
-        } else {
+    handleQuestion() {
+        if (this.state.video_task && this.state.video_task.task_id && this.refs.video) {
             this.setState({
-                video_task_list: [],
-                video_task:{},
-                video_task_list_index: 0,
-                user_list: []
-            });
+                is_question: true
+            }, function() {
+                this.refs.video.videoEl.pause();
+                this.handleReloadUser(this.state.video_task.task_id);
+            }.bind(this));
         }
+
+    }
+
+    handleCanceQuestion() {
         this.setState({
             is_question: false
         });
@@ -166,6 +146,10 @@ class Index extends Component {
 
 
     }
+
+    handleEnded = (event) => {
+        this.handleQuestion();
+    };
 
     render() {
         return (
@@ -205,18 +189,21 @@ class Index extends Component {
                         onCancel={this.handleCancelVideo.bind(this)}
                     >
                         <div className="index-5-modal-main">
-                            <div className="video-body">
-                                <Video
-                                    ref="video"
-                                    controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
-                                    poster=""
-                                    onPlay = {this.handlePayVideo.bind(this)}
-                                    onPause={this.handlePauseVideo.bind(this)}
-                                >
-                                    <source type="video/mp4"/>
-                                </Video>
+                            <Video
+                                ref="video"
+                                controls={['PlayPause', 'Seek', 'Time', 'Volume', 'Fullscreen']}
+                                poster=""
+                                onEnded={this.handleEnded}
+                                onPlay = {this.handlePayVideo.bind(this)}
+                                onPause={this.handlePauseVideo.bind(this)}
+                            >
+                                <source type="video/mp4"/>
+                            </Video>
+                            <div className="" style={{marginTop: '10px'}}>
+                                <Button type="primary" onClick={this.handleQuestion.bind(this)}>
+                                    看完了
+                                </Button>
                             </div>
-                            
                         </div>
                     </Modal>
                     <Modal

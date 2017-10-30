@@ -196,7 +196,7 @@
 }
 
 .index-5-modal-main {
-    height: 550px;
+    height: 560px;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -469,10 +469,6 @@
     z-index: 999;
 }
 
-.video-body {
-    pointer-events: none;
-
-}
 
 
 
