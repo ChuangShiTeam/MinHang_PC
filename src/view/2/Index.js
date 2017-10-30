@@ -130,6 +130,7 @@ class Index extends Component {
     }
 
     handleSongOk() {
+        this.refs.basicSoundPlayer.soundCloudAudio.pause();
         this.setState({
             party_song: {},
             songVisible: false,
@@ -138,6 +139,7 @@ class Index extends Component {
     }
 
     handleSongCancel() {
+        this.refs.basicSoundPlayer.soundCloudAudio.pause();
         this.setState({
             party_song: {},
             songVisible: false,
@@ -160,6 +162,7 @@ class Index extends Component {
                 this.setState({
                     party_song: data
                 }, function() {
+                    this.refs.basicSoundPlayer.soundCloudAudio.play();
                     this.handleReloadUser(data.task_id);
                 }.bind(this));
             }.bind(this),
@@ -186,12 +189,61 @@ class Index extends Component {
                 this.setState({
                     party_song: data
                 }, function() {
+                    this.refs.basicSoundPlayer.soundCloudAudio.play();
                     this.handleReloadUser(data.task_id);
                 }.bind(this));
             }.bind(this),
             complete: function () {
                 this.setState({
                     is_song_load: false
+                });
+            }.bind(this)
+        });
+    }
+
+    handlePrevHistory() {
+        this.setState({
+            is_history_load: true,
+        });
+        http.request({
+            url: '/mobile/minhang/party/history/prev',
+            data: {
+                party_history_id: this.state.party_history.party_history_id
+            },
+            success: function (data) {
+                this.setState({
+                    party_history: data
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_history_load: false
+                });
+            }.bind(this)
+        });
+    }
+
+    handleNextHistory() {
+        this.setState({
+            is_history_load: true,
+        });
+        http.request({
+            url: '/mobile/minhang/party/history/next',
+            data: {
+                party_history_id: this.state.party_history.party_history_id
+            },
+            success: function (data) {
+                this.setState({
+                    party_history: data
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_history_load: false
                 });
             }.bind(this)
         });
@@ -222,6 +274,12 @@ class Index extends Component {
                     <Spin spinning={this.state.is_history_load}>
                         <div className="modal-2-main" dangerouslySetInnerHTML={{__html: this.state.party_history.party_history_content?validate.unescapeHtml(this.state.party_history.party_history_content):null}}>
 
+                        </div>
+                        <div className="modal-button">
+                            <buttom className="pre_but" onClick={this.handlePrevHistory.bind(this)}>
+                            </buttom>
+                            <buttom className="next_but" onClick={this.handleNextHistory.bind(this)}>
+                            </buttom>
                         </div>
                         <div className="modal-footer">
                             <img className="task-qrcode" src={constant.host + this.state.party_history.task_qrcode_url} alt=""/>
@@ -255,6 +313,7 @@ class Index extends Component {
                                 {
                                     this.state.party_song.party_song_url?
                                         <BasicSoundPlayer
+                                            ref="basicSoundPlayer"
                                             trackTitle="红色歌曲"
                                             prevIndex={this.prevSong.bind(this)}
                                             nextIndex={this.nextSong.bind(this)}

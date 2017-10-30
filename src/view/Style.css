@@ -33,8 +33,37 @@
 .modal-audio {
     position: absolute;
     z-index: 9;
-    top: 1060px;
+    top: 1070px;
     width: 100%;
+}
+
+.modal-button {
+    position: absolute;
+    z-index: 11;
+    top: 1050px;
+    width: 100%;
+}
+
+.modal-button .pre_but {
+    position: absolute;
+    z-index: 12;
+    background: url('../image/index_01_prev_but.png') no-repeat center;
+    background-size: 100% 100%;
+    left: 80px;
+    width: 80%;
+    height: 90px;
+    cursor: pointer;
+}
+
+.modal-button .next_but {
+    position: absolute;
+    z-index: 14;
+    background: url('../image/index_01_next_but.png') no-repeat center;
+    background-size: 100% 100%;
+    left: 100px;
+    width: 80%;
+    height: 87.5px;
+    cursor: pointer;
 }
 
 .modal-footer {

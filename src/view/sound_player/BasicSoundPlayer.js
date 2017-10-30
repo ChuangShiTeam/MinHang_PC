@@ -13,6 +13,7 @@ class BasicSoundPlayer extends Component {
 		this.props.soundCloudAudio.pause();
 		this.props.nextIndex();
 	}
+
 	render() {
 		const { track, currentTime, duration, soundCloudAudio} = this.props;
 		return (
