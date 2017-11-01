@@ -43,7 +43,8 @@ class Index extends Component {
 
     }
 
-    handleChange() {
+    handleChange(index) {
+        this.slider.slickGoTo(index);
         this.setState({
             is_show: this.state.is_show === 'history'?'song':'history'
         });
@@ -131,6 +132,7 @@ class Index extends Component {
     }
 
     handleSongOk() {
+        this.refs.basicSoundPlayer.soundCloudAudio.pause();
         this.setState({
             party_song: {},
             songVisible: false,
@@ -139,6 +141,7 @@ class Index extends Component {
     }
 
     handleSongCancel() {
+        this.refs.basicSoundPlayer.soundCloudAudio.pause();
         this.setState({
             party_song: {},
             songVisible: false,
@@ -161,6 +164,7 @@ class Index extends Component {
                 this.setState({
                     party_song: data
                 }, function() {
+                    this.refs.basicSoundPlayer.soundCloudAudio.play();
                     this.handleReloadUser(data.task_id);
                 }.bind(this));
             }.bind(this),
@@ -187,6 +191,7 @@ class Index extends Component {
                 this.setState({
                     party_song: data
                 }, function() {
+                    this.refs.basicSoundPlayer.soundCloudAudio.play();
                     this.handleReloadUser(data.task_id);
                 }.bind(this));
             }.bind(this),
@@ -196,6 +201,58 @@ class Index extends Component {
                 });
             }.bind(this)
         });
+    }
+
+    handlePrevHistory() {
+        this.setState({
+            is_history_load: true,
+        });
+        http.request({
+            url: '/mobile/minhang/party/history/prev',
+            data: {
+                party_history_id: this.state.party_history.party_history_id
+            },
+            success: function (data) {
+                this.setState({
+                    party_history: data
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_history_load: false
+                });
+            }.bind(this)
+        });
+    }
+
+    handleNextHistory() {
+        this.setState({
+            is_history_load: true,
+        });
+        http.request({
+            url: '/mobile/minhang/party/history/next',
+            data: {
+                party_history_id: this.state.party_history.party_history_id
+            },
+            success: function (data) {
+                this.setState({
+                    party_history: data
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                }.bind(this));
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_history_load: false
+                });
+            }.bind(this)
+        });
+    }
+
+    handleClick() {
+        this.slider.slickGoTo(this.state.is_show === 'history'?1:0);
     }
 
     render() {
@@ -209,18 +266,18 @@ class Index extends Component {
                     </buttom>
                 </div>
                 <div className="page_but">
-                    <buttom className={this.state.is_show === 'history' ? 'page_but_01': 'page_but_02'}>
+                    <buttom className={this.state.is_show === 'history' ? 'page_but_01': 'page_but_02'} onClick={this.handleClick.bind(this)}>
                     </buttom>
                 </div>
                 <Slider ref={c => this.slider = c } {...{
-                    infinite: false,
+                    infinite: true,
                     speed: 500,
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     arrows: false,
                     afterChange: this.handleChange.bind(this),
                 }}>
-                    <div key={0} className="index-2-carousel-item">
+                    <div key={0} className="index-2-carousel-item" >
                         <img src={require('../../image/index_01_bg-1.png')} alt=""/>
                     </div>
                     <div key={1} className="index-2-carousel-item">
@@ -238,6 +295,12 @@ class Index extends Component {
                     <Spin spinning={this.state.is_history_load}>
                         <div className="modal-2-main" dangerouslySetInnerHTML={{__html: this.state.party_history.party_history_content?validate.unescapeHtml(this.state.party_history.party_history_content):null}}>
 
+                        </div>
+                        <div className="modal-button">
+                            <buttom className="pre_but" onClick={this.handlePrevHistory.bind(this)}>
+                            </buttom>
+                            <buttom className="next_but" onClick={this.handleNextHistory.bind(this)}>
+                            </buttom>
                         </div>
                         <div className="modal-footer">
                             <img className="task-qrcode" src={constant.host + this.state.party_history.task_qrcode_url} alt=""/>
@@ -271,6 +334,7 @@ class Index extends Component {
                                 {
                                     this.state.party_song.party_song_url?
                                         <BasicSoundPlayer
+                                            ref="basicSoundPlayer"
                                             trackTitle="红色歌曲"
                                             prevIndex={this.prevSong.bind(this)}
                                             nextIndex={this.nextSong.bind(this)}
