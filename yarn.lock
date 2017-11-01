@@ -44,8 +44,8 @@ acorn@^4.0.3, acorn@^4.0.4:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.13.tgz#105495ae5361d697bd195c825192e1ad7f253787"
 
 acorn@^5.0.0, acorn@^5.1.1:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.1.2.tgz#911cb53e036807cf0fa778dc5d370fbd864246d7"
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.2.0.tgz#39fd0cf9d2dd4c82068602a404019d8ed5167b1c"
 
 add-dom-event-listener@1.x:
   version "1.0.2"
@@ -142,8 +142,8 @@ ansi-styles@^3.0.0, ansi-styles@^3.1.0:
     color-convert "^1.9.0"
 
 antd@^2.13.3:
-  version "2.13.7"
-  resolved "https://registry.yarnpkg.com/antd/-/antd-2.13.7.tgz#9b50249b1909facc2af7f7e8d1bea88e4af68db2"
+  version "2.13.8"
+  resolved "https://registry.yarnpkg.com/antd/-/antd-2.13.8.tgz#8aa3e8562a91e775a908dc303cd689d178dc0c07"
   dependencies:
     array-tree-filter "~1.0.0"
     babel-runtime "6.x"
@@ -182,8 +182,8 @@ antd@^2.13.3:
     rc-tree-select "~1.10.2"
     rc-upload "~2.4.0"
     rc-util "^4.0.4"
-    react-lazy-load "^3.0.10"
-    react-slick "~0.15.0"
+    react-lazy-load "^3.0.12"
+    react-slick "~0.15.4"
     shallowequal "^1.0.1"
     warning "~3.0.0"
 
@@ -1112,6 +1112,273 @@ base64-js@^1.0.2:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.1.tgz#a91947da1f4a516ea38e5b4ec0ec3773675e0886"
 
+basscss-background-images@0.0.9:
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/basscss-background-images/-/basscss-background-images-0.0.9.tgz#e7662311921dd4aa6feb8786a348f5a0a57590ac"
+
+basscss-base-buttons@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/basscss-base-buttons/-/basscss-base-buttons-1.1.1.tgz#3ae604da9e69359fd6b94f5ff1870f065c6e3f8e"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-base-forms@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/basscss-base-forms/-/basscss-base-forms-1.2.0.tgz#d538932948e06776b4fd4c3dcdf8d48cfbc560ca"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-base-reset@^2.0.1:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/basscss-base-reset/-/basscss-base-reset-2.0.3.tgz#592716179e497e0b4e7c9add1f1c4c34017c572d"
+
+basscss-base-tables@^1.0.0:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/basscss-base-tables/-/basscss-base-tables-1.0.2.tgz#b850ea1d64b06f91922bfcf4014baaa0836abb30"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-base-typography@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/basscss-base-typography/-/basscss-base-typography-1.1.1.tgz#08fc3488e4520703259b50fb49367928ac3bf33d"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-borders@^1.0.2:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/basscss-borders/-/basscss-borders-1.1.1.tgz#e9e99bff6d32ca126043436dc965fba52ac5f7cc"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-button-blue-outline@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/basscss-button-blue-outline/-/basscss-button-blue-outline-0.0.2.tgz#c8016523ebfd592e755477f9c4c8ba2a9dcd7866"
+
+basscss-button-blue-outline@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/basscss-button-blue-outline/-/basscss-button-blue-outline-0.0.3.tgz#8441317f4023dd3d0462aab1dd59ce020d051566"
+
+basscss-button-blue@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-button-blue/-/basscss-button-blue-0.0.1.tgz#d3a9e97f3837bf6ff621db47f131dbc0cb9d25c8"
+
+basscss-button-gray@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-button-gray/-/basscss-button-gray-0.0.1.tgz#615aa3c2a1e4d06b350a4aac9e4b75bd91032547"
+
+basscss-button-light-gray@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/basscss-button-light-gray/-/basscss-button-light-gray-0.0.2.tgz#d6348cb0af6b5dbc9d30f02a5ff7af727128fadc"
+
+basscss-button-light-gray@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/basscss-button-light-gray/-/basscss-button-light-gray-0.0.3.tgz#bd6d70d3b714ad64581996d8c1b59e21e5605481"
+
+basscss-button-link@^1.0.1:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/basscss-button-link/-/basscss-button-link-1.2.4.tgz#029d879747932bb258e2840014e00fd3f86ffdb8"
+
+basscss-button-nav-dark@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-button-nav-dark/-/basscss-button-nav-dark-0.0.1.tgz#2a43333114f126ac10f7e91de30fa20b3c83c9d2"
+
+basscss-button-nav-dark@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/basscss-button-nav-dark/-/basscss-button-nav-dark-0.0.3.tgz#2927f57c4ee2da18b83d25af6ecde46ba8f45917"
+
+basscss-button-nav-light@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-button-nav-light/-/basscss-button-nav-light-0.0.1.tgz#57cec06ed2af9e6ebea7abf27f39054c6008818b"
+
+basscss-button-nav-light@0.0.2:
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/basscss-button-nav-light/-/basscss-button-nav-light-0.0.2.tgz#042911eb68f9043416321bc579bef09ba63c9e79"
+
+basscss-button-nav-tab@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/basscss-button-nav-tab/-/basscss-button-nav-tab-0.0.3.tgz#6ad8863ba2409c608bf9c5c125a45346a0fca4aa"
+
+basscss-button-outline@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/basscss-button-outline/-/basscss-button-outline-1.1.1.tgz#c403f92a2db4af56880f77c17226cd46294236e6"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-button-red@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-button-red/-/basscss-button-red-0.0.1.tgz#020d60675329290344fba07336bb771d15d10327"
+
+basscss-button-sizes@^1.0.5:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/basscss-button-sizes/-/basscss-button-sizes-1.0.7.tgz#304433d0b54dba8cb6614b3edeade4eef13deda2"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-button-transparent@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/basscss-button-transparent/-/basscss-button-transparent-1.1.1.tgz#bc82a3218b592810c55240c9bce6d37b4ae2fa65"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-color-base@^1.3.2:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/basscss-color-base/-/basscss-color-base-1.4.0.tgz#667f53016795571b2dbe8e9f829d3dc12bfae811"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-color-buttons@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/basscss-color-buttons/-/basscss-color-buttons-1.0.2.tgz#7279d14a9b0c673e1b2133dc2c6488de4b36fb3c"
+  dependencies:
+    basscss-button-blue "0.0.1"
+    basscss-button-blue-outline "0.0.2"
+    basscss-button-light-gray "0.0.2"
+    basscss-button-nav-dark "0.0.1"
+    basscss-button-nav-light "0.0.1"
+    basscss-button-red "0.0.1"
+
+basscss-color-forms-dark@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basscss-color-forms-dark/-/basscss-color-forms-dark-1.1.0.tgz#b13421c6b301ec2c45596118a0dcc5319c6ab79a"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-color-forms@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/basscss-color-forms/-/basscss-color-forms-2.2.1.tgz#a1a73dd472eb1e6c9b392441b317e5c9359afd9d"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-color-tables@^1.0.2:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/basscss-color-tables/-/basscss-color-tables-1.0.4.tgz#d435ec7c5f210fa17de7d1b8813debbca6a543e1"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-colors@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/basscss-colors/-/basscss-colors-1.0.10.tgz#797da77dd9041c7e94807fe8d714bfa262f4a17b"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-defaults@^2.0.1:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/basscss-defaults/-/basscss-defaults-2.1.3.tgz#b4ea634e815c6923f0c7665b148a4cc8b3b43927"
+  dependencies:
+    colors.css "^2.0.4"
+
+basscss-grid@^1.0.2:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/basscss-grid/-/basscss-grid-1.0.6.tgz#1a512c73b8743305e47a36a7432aad5c26cc2867"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-highlight@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-highlight/-/basscss-highlight-0.0.1.tgz#1763d649e59a6e1bf601541b0eeb52fe95030788"
+
+basscss-input-range@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/basscss-input-range/-/basscss-input-range-1.1.5.tgz#8e11b9651b2fa7865fed2dce6e4a3b4d1eed76d2"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-media-object@^1.0.4:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basscss-media-object/-/basscss-media-object-1.1.0.tgz#73fd191374512c5ed5318a1b57524c7f7f22d101"
+
+basscss-positions@^1.0.1:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/basscss-positions/-/basscss-positions-1.0.5.tgz#e4fdfb6d031cf258c61117f93371f3abbb93881a"
+
+basscss-progress@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/basscss-progress/-/basscss-progress-1.0.5.tgz#80657752b1b3b697dbfc8823a258e2232768f8af"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-responsive-states@^1.0.1:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/basscss-responsive-states/-/basscss-responsive-states-1.0.6.tgz#d892343e1799885c03e4f1c702cd7c1ab528f002"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss-responsive-white-space@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-responsive-white-space/-/basscss-responsive-white-space-0.0.1.tgz#b928d2aa2e2f931af4ec04b40a98eb513d4a8764"
+
+basscss-table-object@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/basscss-table-object/-/basscss-table-object-0.0.7.tgz#01204f7d187a0e8b95caf73046eb7a3671cffd45"
+
+basscss-ui-utility-groups@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/basscss-ui-utility-groups/-/basscss-ui-utility-groups-1.0.1.tgz#a099c8421003cc049c1f7593866705d99b013ec6"
+
+basscss-utility-headings@0.0.6:
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/basscss-utility-headings/-/basscss-utility-headings-0.0.6.tgz#0e3153c8c247b7445dd24d3d6af5681c8a61b9e4"
+
+basscss-utility-layout@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basscss-utility-layout/-/basscss-utility-layout-1.1.0.tgz#e6f557cea27113d3be98f917c6653b93a0bda015"
+
+basscss-utility-typography@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basscss-utility-typography/-/basscss-utility-typography-1.1.0.tgz#042847429e7a1cbcef96c836b3f45cce0ca70029"
+
+basscss-white-space@^1.0.1:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/basscss-white-space/-/basscss-white-space-1.1.4.tgz#2662a6cc0ef1a16eedf153a19a578ac27cbb3389"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
+basscss@^6.1.6:
+  version "6.1.6"
+  resolved "https://registry.yarnpkg.com/basscss/-/basscss-6.1.6.tgz#28722e1198117e7676792b366c719af6c24dab51"
+  dependencies:
+    basscss-background-images "0.0.9"
+    basscss-base-buttons "^1.1.0"
+    basscss-base-forms "^1.2.0"
+    basscss-base-reset "^2.0.1"
+    basscss-base-tables "^1.0.0"
+    basscss-base-typography "^1.1.1"
+    basscss-borders "^1.0.2"
+    basscss-button-blue "0.0.1"
+    basscss-button-blue-outline "0.0.3"
+    basscss-button-gray "0.0.1"
+    basscss-button-light-gray "0.0.3"
+    basscss-button-link "^1.0.1"
+    basscss-button-nav-dark "0.0.3"
+    basscss-button-nav-light "0.0.2"
+    basscss-button-nav-tab "0.0.3"
+    basscss-button-outline "^1.1.0"
+    basscss-button-red "0.0.1"
+    basscss-button-sizes "^1.0.5"
+    basscss-button-transparent "^1.1.0"
+    basscss-color-base "^1.3.2"
+    basscss-color-buttons "^1.0.1"
+    basscss-color-forms "^2.2.1"
+    basscss-color-forms-dark "^1.1.0"
+    basscss-color-tables "^1.0.2"
+    basscss-colors "^1.0.10"
+    basscss-defaults "^2.0.1"
+    basscss-grid "^1.0.2"
+    basscss-highlight "0.0.1"
+    basscss-input-range "^1.1.5"
+    basscss-media-object "^1.0.4"
+    basscss-positions "^1.0.1"
+    basscss-progress "^1.0.5"
+    basscss-responsive-states "^1.0.1"
+    basscss-responsive-white-space "0.0.1"
+    basscss-table-object "0.0.7"
+    basscss-ui-utility-groups "^1.0.1"
+    basscss-utility-headings "0.0.6"
+    basscss-utility-layout "^1.1.0"
+    basscss-utility-typography "^1.1.0"
+    basscss-white-space "^1.0.1"
+    flex-object "^1.1.3"
+
 batch@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/batch/-/batch-0.6.1.tgz#dc34314f4e679318093fc760272525f94bf25c16"
@@ -1390,12 +1657,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000752"
-  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000752.tgz#daa129d54ce700e94ad14388bdef514ec1e2dd54"
+  version "1.0.30000755"
+  resolved "https://registry.yarnpkg.com/caniuse-db/-/caniuse-db-1.0.30000755.tgz#a08c547c39dbe4ad07dcca9763fcbbff0c891de0"
 
 caniuse-lite@^1.0.30000669, caniuse-lite@^1.0.30000744:
-  version "1.0.30000752"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000752.tgz#0a79df520669d92ddc7f57406eed935948263130"
+  version "1.0.30000755"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000755.tgz#9ce5f6e06bd75ec8209abe8853c3beef02248d65"
 
 capture-stack-trace@^1.0.0:
   version "1.0.0"
@@ -1569,6 +1836,10 @@ colormin@^1.0.5:
     color "^0.11.0"
     css-color-names "0.0.4"
     has "^1.0.1"
+
+colors.css@^2.0.4:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/colors.css/-/colors.css-2.3.0.tgz#e8953837543e19d98e2917ff0b998f6db286213b"
 
 colors@~1.1.2:
   version "1.1.2"
@@ -2820,6 +3091,12 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
+flex-object@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/flex-object/-/flex-object-1.1.3.tgz#9f79e4c634b7deb6603d94b3f579ca06454200de"
+  dependencies:
+    basscss-defaults "^2.0.1"
+
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -3163,6 +3440,10 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+highlight.js@^9.12.0:
+  version "9.12.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.12.0.tgz#e6d9dbe57cbefe60751f02af336195870c90c01e"
+
 history@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/history/-/history-2.1.2.tgz#4aa2de897a0e4867e4539843be6ecdb2986bfdec"
@@ -3191,6 +3472,10 @@ hoek@4.x.x:
 hoist-non-react-statics@1.x, hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
+
+hoist-non-react-statics@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.3.1.tgz#343db84c6018c650778898240135a1420ee22ce0"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -3317,10 +3602,6 @@ http-signature@~1.2.0:
 https-browserify@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/https-browserify/-/https-browserify-0.0.1.tgz#3f91365cabe60b77ed0ebba24b454e3e09d95a82"
-
-iconv-lite@0.4.13:
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
 
 iconv-lite@0.4.19, iconv-lite@^0.4.17, iconv-lite@~0.4.13:
   version "0.4.19"
@@ -5313,7 +5594,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@15.x, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9:
+prop-types@15.x, prop-types@^15.5.0, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.0.tgz#ceaf083022fc46b4a35f69e13ef75aed0d639856"
   dependencies:
@@ -5848,7 +6129,7 @@ react-html5video@^2.4.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-html5video/-/react-html5video-2.5.0.tgz#a2e2555388610c10f868b906c77f754579518814"
 
-react-lazy-load@^3.0.10:
+react-lazy-load@^3.0.12:
   version "3.0.12"
   resolved "https://registry.yarnpkg.com/react-lazy-load/-/react-lazy-load-3.0.12.tgz#2b841dfc3227e8119d033189d2c960ce384d0cb9"
   dependencies:
@@ -5882,7 +6163,7 @@ react-router@^2.8.1:
     loose-envify "^1.2.0"
     warning "^3.0.0"
 
-react-slick@^0.15.4, react-slick@~0.15.0:
+react-slick@^0.15.4, react-slick@~0.15.4:
   version "0.15.4"
   resolved "https://registry.yarnpkg.com/react-slick/-/react-slick-0.15.4.tgz#6709c87b06e7640feeacc06711be42cc2066aabe"
   dependencies:
@@ -5893,6 +6174,17 @@ react-slick@^0.15.4, react-slick@~0.15.0:
     json2mq "^0.2.0"
     object-assign "^4.1.0"
     slick-carousel "^1.6.0"
+
+react-soundplayer@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-soundplayer/-/react-soundplayer-1.0.2.tgz#42a9205c532f89b14dde496456cf7a30704fe8a3"
+  dependencies:
+    classnames "^2.2.5"
+    hoist-non-react-statics "^2.3.1"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
+    react "^16.0.0"
+    soundcloud-audio "^1.2.0"
 
 react-tinymce@^0.5.1:
   version "0.5.1"
@@ -5909,6 +6201,15 @@ react@^15.6.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
     prop-types "^15.5.10"
+
+react@^16.0.0:
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0.tgz#ce7df8f1941b036f02b2cca9dbd0cb1f0e855e2d"
+  dependencies:
+    fbjs "^0.8.16"
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.0"
 
 read-all-stream@^3.0.0:
   version "3.1.0"
@@ -6539,6 +6840,10 @@ sort-keys@^1.0.0:
   dependencies:
     is-plain-obj "^1.0.0"
 
+soundcloud-audio@^1.2.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/soundcloud-audio/-/soundcloud-audio-1.2.1.tgz#2451aee2a9f1ad017810e87e5cbc98c1a099ac71"
+
 source-list-map@^0.1.7, source-list-map@~0.1.7:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-0.1.8.tgz#c550b2ab5427f6b3f21f5afead88c4f5587b2106"
@@ -6970,8 +7275,8 @@ ua-parser-js@^0.7.9:
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
 
 uglify-js@3.1.x:
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.1.5.tgz#4c1a6d53b2fe77e4710dd94631853effd3ff5143"
+  version "3.1.6"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.1.6.tgz#918832602036e95d2318e11f27ee8461a8592c5d"
   dependencies:
     commander "~2.11.0"
     source-map "~0.6.1"
@@ -7278,10 +7583,10 @@ websocket-extensions@>=0.1.1:
   resolved "https://registry.yarnpkg.com/websocket-extensions/-/websocket-extensions-0.1.2.tgz#0e18781de629a18308ce1481650f67ffa2693a5d"
 
 whatwg-encoding@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/whatwg-encoding/-/whatwg-encoding-1.0.2.tgz#bd68ad169c3cf55080562257714bf012e668a165"
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/whatwg-encoding/-/whatwg-encoding-1.0.3.tgz#57c235bc8657e914d24e1a397d3c82daee0a6ba3"
   dependencies:
-    iconv-lite "0.4.13"
+    iconv-lite "0.4.19"
 
 whatwg-fetch@2.0.3, whatwg-fetch@>=0.10.0:
   version "2.0.3"
