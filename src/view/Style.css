@@ -275,11 +275,17 @@
     left: 500px;
     width: 3340px;
     height: 270px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.timeline-up-content {
+    width: 5000px;
 }
 
 .timeline-up-item {
     float: left;
-    min-width: 200px;
+    min-width: 240px;
     height: 270px;
     background: url('../image/index_4_up.png') no-repeat;
     text-align: center;
@@ -288,6 +294,7 @@
 .timeline-up-item-qrcode {
     width: 190px;
     height: 190px;
+    margin-left: 30px;
 }
 
 .timeline-up-item-title {
@@ -303,7 +310,7 @@
     height: 190px;
     margin-left: 30px;
     color: #e60012;
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 .timeline-down {
@@ -312,6 +319,8 @@
     top: 258px;
     width: 3240px;
     height: 270px;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 .timeline-down-item {
@@ -319,6 +328,7 @@
     min-width: 300px;
     height: 270px;
     background: url('../image/index_4_down.png') no-repeat;
+    text-align: center;
 }
 
 .timeline-down-item-title {

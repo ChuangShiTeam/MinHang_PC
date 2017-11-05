@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'dva';
 import {Spin} from 'antd';
-
+import Slider from 'react-slick';
 import constant from '../../util/constant';
 import http from '../../util/http';
 import validate from '../../util/validate';
@@ -96,6 +96,12 @@ class Index extends Component {
                 <Spin spinning={this.state.is_load}>
                     <div className="index-4-bg">
                         <div className="timeline-up">
+                            <Slider ref={c => this.slider = c } {...{
+                                infinite: false,
+                                autoplay: false,
+                                variableWidth: true,
+                                arrows: false
+                            }}>
                             {
                                 this.state.timeline_list.map((timeline, index) => {
                                     return (
@@ -115,8 +121,15 @@ class Index extends Component {
                                     )
                                 })
                             }
+                            </Slider>
                         </div>
                         <div className="timeline-down">
+                            <Slider ref={c => this.slider = c } {...{
+                                infinite: false,
+                                autoplay: false,
+                                variableWidth: true,
+                                arrows: false
+                            }}>
                             {
                                 this.state.timeline_list.map((timeline, index) => {
                                     return (
@@ -136,6 +149,7 @@ class Index extends Component {
                                     )
                                 })
                             }
+                            </Slider>
                         </div>
                     </div>
                 </Spin>
