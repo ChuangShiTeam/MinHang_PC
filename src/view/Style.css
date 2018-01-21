@@ -174,7 +174,7 @@
     width: 2048px;
     height: 1536px;
     position: relative;
-    background: url('../image/index_02_bg.png') no-repeat center;
+    background: url('../image/index_05_bg.png') no-repeat center;
     background-size: cover;
     position: relative;
     -webkit-transform-origin: top left;
@@ -420,6 +420,8 @@
     height: 1920px;
     margin: 0 auto;
     position: relative;
+    background: url('../image/index_01_bg.png') no-repeat center;
+    background-size: 100% 100%;
 }
 
 .index-2-carousel-item {
@@ -431,14 +433,98 @@
     height: 100%;
 }
 
+.index-2-affiant{
+    margin-top: 629px;
+    left: 0px;
+    right:0px;
+    z-index: 99;
+}
+.index-2-affiant-title{
+    padding: 59px 0px 92px 0px;
+    font-size: 42px;
+    color: #000;
+    font-family: 微软雅黑;
+    text-align: center;
+}
+.index-2-affiant-list{
+    height: 842px;
+    overflow-y: scroll;
+    padding: 0px 0px 0px 153px;
+    margin-right:138px;
+}
+.index-2-affiant-item{
+    width: 158px;
+    float: left;
+    margin:15px;
+}
+.index-2-affiant-user-avatar{
+    width: 158px !important;
+    height: 158px !important;
+    border-radius: 50%;
+    padding: 10px;
+}
+.index-2-affiant-user-name{
+    font-size: 35px;
+    color: #7b7b7b;
+    text-align: center;
+    font-family: 微软雅黑;
+    padding-top: 10px;
+}
+.index-2-affiant-info{
+    background: #d25a63;
+}
+.index-2-affiant-info-avatar{
+    text-align: center;
+    padding-top: 26px;
+}
+.index-2-affiant-info-avatar img{
+    width: 158px;
+    height: 158px;
+    border-radius: 50%;
+}
+.index-2-affiant-info-name{
+    font-size: 21px;
+    color: #fff;
+    font-family: 微软雅黑;
+    text-align: center;
+}
+.index-2-affiant-info-summary{
+    font-size: 21px;
+    color: #fff;
+    font-family: 微软雅黑;
+    text-align: center;
+    padding: 26px 0px;
+}
+
+.index-2-affiant-decription{
+    padding: 20px 10px;
+    font-size: 25px;
+    color: #7f7f7f;
+}
+
+.slef-slick-dots .slick-dots{
+    bottom: -5px;
+    margin-bottom: 200px;
+}
+
+.slef-slick-dots .slick-dots li.slick-active button:before {
+    font-size: 16px;
+    color: #D3414C;
+}
+
+.slef-slick-dots .slick-dots li button:before {
+    font-size: 16px;
+    color: #D3414C;
+}
+
 .con_but {
 }
 
 .con_but_01 {
     position: absolute;
-    z-index: 9;
+    z-index: 8;
     top: 470px;
-    left: 200px;
+    left: 580px;
     background: url('../image/index_01_but01.png') no-repeat center;
     background-size: 100% 100%;
     width: 300px;
@@ -448,40 +534,13 @@
 
 .con_but_02 {
     position: absolute;
-    z-index: 8;
+    z-index: 9;
     top: 470px;
-    left: 580px;
+    left: 200px;
     background: url('../image/index_01_but02.png') no-repeat center;
     background-size: 100% 100%;
     width: 300px;
     height: 100px;
-    cursor: pointer;
-}
-.page_but {
-
-}
-
-.page_but_01 {
-    position: absolute;
-    z-index: 10;
-    top: 1700px;
-    left: 490px;
-    background: url('../image/index_01_but04.png') no-repeat center;
-    background-size: 100% 100%;
-    width: 100px;
-    height: 50px;
-    cursor: pointer;
-}
-
-.page_but_02 {
-    position: absolute;
-    z-index: 11;
-    top: 1700px;
-    left: 490px;
-    background: url('../image/index_01_but03.png') no-repeat center;
-    background-size: 100% 100%;
-    width: 100px;
-    height: 50px;
     cursor: pointer;
 }
 
@@ -548,6 +607,7 @@
     background-color: bisque;
     z-index: 999;
 }
+
 
 
 

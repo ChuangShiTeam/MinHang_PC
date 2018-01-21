@@ -14,14 +14,17 @@ class Index extends Component {
         super(props);
 
         this.state = {
-            is_show: 'history',
             historyVisible: false,
             is_history_load: false,
             party_history: {},
             songVisible: false,
             is_song_load:false,
             party_song: {},
-            user_list: []
+            user_list: [],
+            affiantVisible: false,
+            is_affiant_load: false,
+            affiantList: [],
+            affiant:{}
         }
     }
 
@@ -37,6 +40,8 @@ class Index extends Component {
                 this.handleReloadUser(this.state.party_song.task_id);
             }
         });
+
+        this.handleLoadAffiant();
     }
 
     componentWillUnmount() {
@@ -45,8 +50,20 @@ class Index extends Component {
 
     handleChange(index) {
         this.slider.slickGoTo(index);
-        this.setState({
-            is_show: this.state.is_show === 'history'?'song':'history'
+    }
+
+    handleLoadAffiant() {
+        http.request({
+            url: '/mobile/minhang/affiant/list',
+            data: {},
+            success: function (data) {
+                this.setState({
+                    affiantList: data
+                });
+            }.bind(this),
+            complete: function () {
+
+            }.bind(this)
         });
     }
 
@@ -229,7 +246,7 @@ class Index extends Component {
 
     handleNextHistory() {
         this.setState({
-            is_history_load: true,
+            is_history_load: true
         });
         http.request({
             url: '/mobile/minhang/party/history/next',
@@ -251,8 +268,35 @@ class Index extends Component {
         });
     }
 
-    handleClick() {
-        this.slider.slickGoTo(this.state.is_show === 'history'?1:0);
+    handleViewAffiant(affiant_id) {
+        this.setState({
+            is_affiant_load: true
+        });
+        http.request({
+            url: '/mobile/minhang/affiant/find',
+            data: {
+                affiant_id: affiant_id
+            },
+            success: function (data) {
+                this.setState({
+                    affiant: data,
+                    affiantVisible: true
+                });
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_affiant_load: false
+                });
+            }.bind(this)
+        });
+    }
+
+    handleCloseViewAffiant() {
+        this.setState({
+            affiantVisible: false,
+            affiant: {},
+            is_affiant_load: false
+        })
     }
 
     render() {
@@ -260,30 +304,53 @@ class Index extends Component {
         return (
             <div className="index-2-bg">
                 <div className="con_but">
-                    <buttom className="con_but_01" onClick={this.handleClickPartyHistory.bind(this)}>
-                    </buttom>
                     <buttom className="con_but_02" onClick={this.handleClickPartySong.bind(this)}>
                     </buttom>
-                </div>
-                <div className="page_but">
-                    <buttom className={this.state.is_show === 'history' ? 'page_but_01': 'page_but_02'} onClick={this.handleClick.bind(this)}>
+                    <buttom className="con_but_01" onClick={this.handleClickPartyHistory.bind(this)}>
                     </buttom>
                 </div>
-                <Slider ref={c => this.slider = c } {...{
-                    infinite: true,
-                    speed: 500,
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                    arrows: false,
-                    afterChange: this.handleChange.bind(this),
-                }}>
-                    <div key={0} className="index-2-carousel-item" >
-                        <img src={require('../../image/index_01_bg-1.png')} alt=""/>
-                    </div>
-                    <div key={1} className="index-2-carousel-item">
-                        <img src={require('../../image/index_01_bg-2.png')} alt=""/>
-                    </div>
-                </Slider>
+                <div className="slef-slick-dots">
+                    <Slider ref={c => this.slider = c } {...{
+                        infinite: true,
+                        speed: 500,
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        dots: true,
+                        afterChange: this.handleChange.bind(this)
+                    }}>
+                        <div key={0} className="index-2-carousel-item" >
+                            <img src={require('../../image/index_01_bg-1.png')} alt=""/>
+                        </div>
+                        <div key={1} className="index-2-carousel-item">
+                            <img src={require('../../image/index_01_bg-2.png')} alt=""/>
+                        </div>
+                        <div key={2} className="index-2-carousel-item" >
+                            <img src={require('../../image/index_01_bg-3.png')} alt=""/>
+                        </div>
+                        <div key={3} className="index-2-carousel-item">
+                            <img src={require('../../image/index_01_bg-4.png')} alt=""/>
+                        </div>
+                        <div key={4} className="index-2-carousel-item" >
+                            <div className="index-2-affiant">
+                                <div className="index-2-affiant-title"> 闵行区党建服务中心领誓人库建议人选</div>
+                                <div className="index-2-affiant-list">
+                                    <ul>
+                                        {
+                                            this.state.affiantList.map((affiant, index) =>
+                                                <li className="index-2-affiant-item" onClick={this.handleViewAffiant.bind(this, affiant.affiant_id)} key={index}>
+                                                    <img className="index-2-affiant-user-avatar" src={affiant.affiant_avatar_file ? (constant.host + affiant.affiant_avatar_file.file_original_path) : require('../../image/index-01_userAvatar.png')} alt=""/>
+                                                    <div className="index-2-affiant-user-name">{affiant.affiant_name}</div>
+                                                </li>
+                                            )
+                                        }
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </Slider>
+                </div>
                 <Modal
                     centered modal dialog
                     title='红色诗词'
@@ -315,6 +382,31 @@ class Index extends Component {
                                         </div>)
                                 })
                             }
+                        </div>
+                    </Spin>
+                </Modal>
+                <Modal
+                    centered modal dialog
+                    title='领誓人'
+                    width = {500}
+                    visible={this.state.affiantVisible}
+                    onOk={this.handleCloseViewAffiant.bind(this)}
+                    onCancel={this.handleCloseViewAffiant.bind(this)}
+                >
+                    <Spin spinning={this.state.is_affiant_load}>
+                        <div className="index-2-affiant-info">
+                            <div className="index-2-affiant-info-avatar">
+                                <img src={(this.state.affiant && this.state.affiant.affiant_avatar_file) ? (constant.host + this.state.affiant.affiant_avatar_file.file_original_path) : require('../../image/index-01_userAvatar.png')} alt=""/>
+                            </div>
+                            <div className="index-2-affiant-info-name">
+                                <span>{this.state.affiant.affiant_name}</span>
+                                <span style={{marginLeft: '10px',marginRight: '10px'}}>{this.state.affiant.affiant_sex}</span>
+                                <span>{this.state.affiant.affiant_birthday}</span>
+                            </div>
+                            <div className="index-2-affiant-info-summary">{this.state.affiant.affiant_summary}</div>
+                        </div>
+                        <div className="index-2-affiant-decription" dangerouslySetInnerHTML={{__html: this.state.affiant.affiant_description}}>
+
                         </div>
                     </Spin>
                 </Modal>

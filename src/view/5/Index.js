@@ -166,7 +166,7 @@ class Index extends Component {
                                                 video.file_path ?
                                                     <img src={constant.host + video.file_path} style={{width: '240px', height: '150px'}} alt=""/>
                                                     :
-                                                    <img src={require('../../image/index_02_video.png')} style={{width: '240px', height: '150px'}} alt=""/>
+                                                    <img src={require('../../image/index_05_video.png')} style={{width: '240px', height: '150px'}} alt=""/>
 
                                             }
                                             <div className="index-5-main-text">{video.video_title}</div>
