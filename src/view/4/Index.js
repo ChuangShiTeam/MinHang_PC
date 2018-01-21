@@ -1,158 +1,100 @@
 import React, {Component} from 'react';
 import {connect} from 'dva';
-import {Spin} from 'antd';
-import Slider from 'react-slick';
-import constant from '../../util/constant';
-import http from '../../util/http';
-import validate from '../../util/validate';
-import notification from '../../util/notification';
+import {Modal} from 'antd';
 
 class Index extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            timeline_list: [],
-            timeline_event: {},
-            is_load: false,
-            user_list: []
+            isPlay: false,
+            isVisible: false,
+            left: 0,
+            title: '',
+            content: ''
         }
     }
 
     componentDidMount() {
-        notification.on('loadTimelineEvent', this, function (data) {
-            if (this.state.timeline_event && this.state.timeline_event.task_id) {
-                this.handleReloadUser(this.state.timeline_event.task_id);
-            }
-        });
-        this.handleLoadTimeline();
+
     }
 
     componentWillUnmount() {
 
     }
 
-    handleReloadUser(task_id) {
-        http.request({
-            url: '/mobile/minhang/task/user/complete/list',
-            data: {
-                task_id: task_id,
-                page_index: 1,
-                page_size: 8
-            },
-            success: function (data) {
-                this.setState({
-                    user_list: data
-                });
-            }.bind(this),
-            complete: function () {
-
-            }.bind(this)
+    handleClick(event) {
+        this.setState({
+            isVisible: true,
+            left: 0,
+            title: '',
+            content: ''
         });
     }
 
-    handleLoadTimeline() {
+    handleMouseDown() {
         this.setState({
-            is_load: true
-        });
-        http.request({
-            url: '/mobile/minhang/timeline/list',
-            data: {},
-            success: function (data) {
-                for (let i = 0; i < data.length; i++) {
-                    data[i].is_show_qrcode = false;
-                }
-                this.setState({
-                    timeline_list: data
-                });
-            }.bind(this),
-            complete: function () {
-                this.setState({
-                    is_load: false
-                });
-            }.bind(this)
+            isPlay: true
         });
     }
 
-    handleClickTimeline(timeline_id) {
-        let data = this.state.timeline_list;
-
-        for (let i = 0; i < data.length; i++) {
-            if (data[i].timeline_id === timeline_id) {
-                data[i].is_show_qrcode = !data[i].is_show_qrcode;
-            } else {
-                data[i].is_show_qrcode = false;
-            }
-        }
-
+    handleMouseUp() {
         this.setState({
-            timeline_list: data
+            isPlay: false
+        });
+    }
+
+    handleCancel(index) {
+        this.setState({
+            isVisible: false
         });
     }
 
     render() {
         return (
             <div className="index-4-div">
-                <Spin spinning={this.state.is_load}>
-                    <div className="index-4-bg">
-                        <div className="timeline-up">
-                            <Slider ref={c => this.slider = c } {...{
-                                infinite: false,
-                                autoplay: false,
-                                variableWidth: true,
-                                arrows: false
-                            }}>
-                            {
-                                this.state.timeline_list.map((timeline, index) => {
-                                    return (
-                                        index % 2 === 0 ?
-                                            <div key={index} className="timeline-up-item" onClick={this.handleClickTimeline.bind(this, timeline.timeline_id)}>
-                                                <div className="timeline-up-item-title">{timeline.timeline_year}</div>
-                                                {
-                                                    timeline.is_show_qrcode && timeline.timeline_event_list[0] && timeline.timeline_event_list[0].task_qrcode_url ?
-                                                        <img className="timeline-up-item-qrcode" src={constant.host + timeline.timeline_event_list[0].task_qrcode_url} alt="" />
-                                                        :
-                                                        <div className="timeline-up-item-content" dangerouslySetInnerHTML={{__html: timeline.timeline_description?timeline.timeline_description:null}}>
-                                                        </div>
-                                                }
-                                            </div>
-                                            :
-                                            ""
-                                    )
-                                })
-                            }
-                            </Slider>
-                        </div>
-                        <div className="timeline-down">
-                            <Slider ref={c => this.slider = c } {...{
-                                infinite: false,
-                                autoplay: false,
-                                variableWidth: true,
-                                arrows: false
-                            }}>
-                            {
-                                this.state.timeline_list.map((timeline, index) => {
-                                    return (
-                                        index % 2 === 1 ?
-                                            <div key={index} className="timeline-up-item" onClick={this.handleClickTimeline.bind(this, timeline.timeline_id)}>
-                                                <div className="timeline-up-item-title">{timeline.timeline_year}</div>
-                                                {
-                                                    timeline.is_show_qrcode && timeline.timeline_event_list[0] && timeline.timeline_event_list[0].task_qrcode_url ?
-                                                        <img className="timeline-up-item-qrcode" src={constant.host + timeline.timeline_event_list[0].task_qrcode_url} alt="" />
-                                                        :
-                                                        <div className="timeline-up-item-content" dangerouslySetInnerHTML={{__html: timeline.timeline_description?timeline.timeline_description:null}}>
-                                                        </div>
-                                                }
-                                            </div>
-                                            :
-                                            ""
-                                    )
-                                })
-                            }
-                            </Slider>
-                        </div>
-                    </div>
-                </Spin>
+                <Modal
+                    title={this.state.title}
+                    style={{top: 130, left: this.state.left}}
+                    visible={this.state.isVisible}
+                    maskClosable={true}
+                    onCancel={this.handleCancel.bind(this)}
+                >
+                    <p>上海电气电站集团公司</p>
+                </Modal>
+                <div className={'index-4-sky ' + (this.state.isPlay ? 'animation-play' : '')}>
+                    <ul>
+                        <li>
+                            <img src={require('../../image/animation-sky.png')} alt=''/>
+                        </li>
+                        <li>
+                            <img src={require('../../image/animation-sky.png')} alt=''/>
+                        </li>
+                    </ul>
+                </div>
+                <div className={'index-4-bg ' + (this.state.isPlay ? 'animation-play' : '')}>
+                    <ul>
+                        <li>
+                            <div className="building-0" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-1" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-2" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-3" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-4" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-5" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-6" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-7" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-8" onClick={this.handleClick.bind(this)}></div>
+                            <div className="building-9" onClick={this.handleClick.bind(this)}></div>
+                            <img src={require('../../image/animation-backgroud.png')} alt=''/>
+                        </li>
+                        <li>
+                            <div className="building-0" onClick={this.handleClick.bind(this)}></div>
+                            <img src={require('../../image/animation-backgroud.png')} alt=''/>
+                        </li>
+                    </ul>
+                </div>
+                <img className="index-4-car" src={require('../../image/animation-car.png')} alt=''
+                     onMouseDown={this.handleMouseDown.bind(this)} onMouseUp={this.handleMouseUp.bind(this)}/>
             </div>
         );
     }

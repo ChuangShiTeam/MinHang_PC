@@ -263,11 +263,186 @@
 }
 
 .index-4-bg {
-    width: 3840px;
+    width: 6770px;
     height: 540px;
     margin: 0 auto;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.index-4-bg ul {
+    width: 13540px;
+    height: 540px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    animation: wufeng 70s linear infinite;
+    animation-play-state: paused;
+}
+
+.index-4-bg ul li {
+    float: left;
     position: relative;
-    background: url('../image/index_4_bg.png') no-repeat center;
+}
+
+.index-4-bg ul li img {
+    height: 540px;
+    display: block;
+}
+
+@keyframes wufeng {
+    0% {
+        left: 0;
+    }
+    100% {
+        left: -6770px;
+    }
+}
+
+.index-4-sky {
+    width: 6770px;
+    height: 540px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.index-4-sky ul {
+    width: 13540px;
+    height: 540px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    animation: wufeng 100s linear infinite;
+    animation-play-state: paused;
+}
+
+.index-4-sky ul li {
+    float: left;
+}
+
+.index-4-sky ul li img {
+    height: 540px;
+    display: block;
+}
+
+.index-4-car {
+    position: absolute;
+    left: 500px;
+    top: 330px;
+    z-index: 4;
+    height: 210px;
+    display: block;
+}
+
+.animation-play ul {
+    animation-play-state: running;
+}
+
+.building-0 {
+    position: absolute;
+    left: 494px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-1 {
+    position: absolute;
+    left: 1052px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-2 {
+    position: absolute;
+    left: 1712px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-3 {
+    position: absolute;
+    left: 2236px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-4 {
+    position: absolute;
+    left: 2657px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-5 {
+    position: absolute;
+    left: 3750px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-6 {
+    position: absolute;
+    left: 4281px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-7 {
+    position: absolute;
+    left: 4713px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-8 {
+    position: absolute;
+    left: 5135px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
+}
+
+.building-9 {
+    position: absolute;
+    left: 5468px;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
 }
 
 .timeline-up {
@@ -544,6 +719,34 @@
     cursor: pointer;
 }
 
+.page_but {
+
+}
+
+.page_but_01 {
+    position: absolute;
+    z-index: 10;
+    top: 1700px;
+    left: 490px;
+    background: url('../image/index_01_but04.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.page_but_02 {
+    position: absolute;
+    z-index: 11;
+    top: 1700px;
+    left: 490px;
+    background: url('../image/index_01_but03.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 100px;
+    height: 50px;
+    cursor: pointer;
+}
+
 .play-toggle {
     visibility: hidden;
 }
@@ -592,6 +795,7 @@
     margin: 0 auto;
     display: block;
 }
+
 .hand-print-upload {
     margin: 20px auto;
     display: block;
@@ -607,7 +811,6 @@
     background-color: bisque;
     z-index: 999;
 }
-
 
 
 
