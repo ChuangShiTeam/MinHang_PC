@@ -46,6 +46,14 @@
             to { transform: rotate(360deg); }
         }
     </style>
+    <script src="./fastclick.js"></script>
+    <script type="text/javascript">
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                FastClick.attach(document.body);
+            }, false);
+        }
+    </script>
 </head>
 <body>
 <noscript>
