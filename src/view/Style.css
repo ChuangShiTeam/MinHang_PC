@@ -345,6 +345,10 @@
     animation-play-state: running;
 }
 
+.building-popover {
+    width: 500px;
+}
+
 .building-0 {
     position: absolute;
     left: 494px;
@@ -618,11 +622,11 @@
     padding: 59px 0px 92px 0px;
     font-size: 42px;
     color: #000;
-    font-family: 微软雅黑;
+    font-family: Microsoft YaHei;
     text-align: center;
 }
 .index-2-affiant-list{
-    height: 842px;
+    height: 942px;
     overflow-y: scroll;
     padding: 0px 0px 0px 153px;
     margin-right:138px;
@@ -635,7 +639,7 @@
 .index-2-affiant-user-avatar{
     width: 158px !important;
     height: 158px !important;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
     padding: 10px;
 }
 .index-2-affiant-user-name{
@@ -679,7 +683,7 @@
 
 .slef-slick-dots .slick-dots{
     bottom: -5px;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
 
 .slef-slick-dots .slick-dots li.slick-active button:before {
@@ -693,13 +697,26 @@
 }
 
 .con_but {
+
+}
+
+.con_but_00 {
+    position: absolute;
+    z-index: 9;
+    top: 470px;
+    left: 40px;
+    background: url('../image/index_01_but03.png') no-repeat center;
+    background-size: 100% 100%;
+    width: 300px;
+    height: 100px;
+    cursor: pointer;
 }
 
 .con_but_01 {
     position: absolute;
     z-index: 8;
     top: 470px;
-    left: 580px;
+    left: 740px;
     background: url('../image/index_01_but01.png') no-repeat center;
     background-size: 100% 100%;
     width: 300px;
@@ -711,7 +728,7 @@
     position: absolute;
     z-index: 9;
     top: 470px;
-    left: 200px;
+    left: 390px;
     background: url('../image/index_01_but02.png') no-repeat center;
     background-size: 100% 100%;
     width: 300px;

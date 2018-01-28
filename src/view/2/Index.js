@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
 import {connect} from 'dva';
-import {Modal, Spin} from 'antd';
+import {Modal, Spin, Button} from 'antd';
 import Slider from 'react-slick';
 
 import http from '../../util/http';
@@ -24,7 +24,8 @@ class Index extends Component {
             affiantVisible: false,
             is_affiant_load: false,
             affiantList: [],
-            affiant:{}
+            affiant:{},
+            affiantSong: ''
         }
     }
 
@@ -86,6 +87,10 @@ class Index extends Component {
         });
     }
 
+    handleClickAffiant() {
+        this.slider.slickGoTo(3);
+    }
+
     handleClickPartyHistory() {
         this.setState({
             is_history_load: true,
@@ -107,6 +112,25 @@ class Index extends Component {
                 });
             }.bind(this)
         });
+    }
+
+    handlePlayAffiantMusic(url) {
+        let result = url === this.state.affiantSong;
+        if (result) {
+            this.refs.basicSoundPlayer2.soundCloudAudio.pause();
+        }
+        this.setState({
+            affiantSong: result ? '' : url
+        }, function () {
+            setTimeout(function () {
+
+                if (result) {
+
+                } else {
+                    this.refs.basicSoundPlayer2.soundCloudAudio.play();
+                }
+            }.bind(this), 0);
+        }.bind(this));
     }
 
     handleClickPartySong() {
@@ -303,11 +327,33 @@ class Index extends Component {
 
         return (
             <div className="index-2-bg">
+                <div style={{
+                        position: 'absolute',
+                        width: '100%',
+                        top: '620px'
+                    }}>
+                    {
+                        this.state.affiantSong ?
+                            <BasicSoundPlayer
+                                ref="basicSoundPlayer2"
+                                trackTitle="红色歌曲"
+                                prevIndex={function () {
+                                    
+                                }}
+                                nextIndex={function () {
+                                    
+                                }}
+                                streamUrl={this.state.affiantSong}
+                            />
+                            :
+                            ''
+
+                    }
+                </div>
                 <div className="con_but">
-                    <buttom className="con_but_02" onClick={this.handleClickPartySong.bind(this)}>
-                    </buttom>
-                    <buttom className="con_but_01" onClick={this.handleClickPartyHistory.bind(this)}>
-                    </buttom>
+                    <buttom className="con_but_00" onClick={this.handleClickAffiant.bind(this)}></buttom>
+                    <buttom className="con_but_02" onClick={this.handleClickPartySong.bind(this)}></buttom>
+                    <buttom className="con_but_01" onClick={this.handleClickPartyHistory.bind(this)}></buttom>
                 </div>
                 <div className="slef-slick-dots">
                     <Slider ref={c => this.slider = c } {...{
@@ -319,21 +365,13 @@ class Index extends Component {
                         dots: true,
                         afterChange: this.handleChange.bind(this)
                     }}>
-                        <div key={0} className="index-2-carousel-item" >
-                            <img src={require('../../image/index_01_bg-1.png')} alt=""/>
-                        </div>
-                        <div key={1} className="index-2-carousel-item">
-                            <img src={require('../../image/index_01_bg-2.png')} alt=""/>
-                        </div>
-                        <div key={2} className="index-2-carousel-item" >
-                            <img src={require('../../image/index_01_bg-3.png')} alt=""/>
-                        </div>
-                        <div key={3} className="index-2-carousel-item">
-                            <img src={require('../../image/index_01_bg-4.png')} alt=""/>
-                        </div>
                         <div key={4} className="index-2-carousel-item" >
                             <div className="index-2-affiant">
-                                <div className="index-2-affiant-title"> 闵行区党建服务中心领誓人库建议人选</div>
+                                <div className="index-2-affiant-title">
+                                    <Button style={{marginRight: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/1.mp3'))}>播放国际歌</Button>
+                                    闵行区党建服务中心领誓人队伍
+                                    <Button style={{marginLeft: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/2.mp3'))}>播放国歌</Button>
+                                </div>
                                 <div className="index-2-affiant-list">
                                     <ul>
                                         {
@@ -348,6 +386,27 @@ class Index extends Component {
                                     </ul>
                                 </div>
                             </div>
+                        </div>
+                        <div key={0} className="index-2-carousel-item" >
+                            <div style={{
+                                width: '1080px',
+                                height: '1920px',
+                                backgroundImage: 'url(' + require('../../image/index_01_bg-1.png') + ')'
+                            }}></div>
+                        </div>
+                        <div key={3} className="index-2-carousel-item">
+                            <div style={{
+                                width: '1080px',
+                                height: '1920px',
+                                backgroundImage: 'url(' + require('../../image/index_01_bg-4.png') + ')'
+                            }}></div>
+                        </div>
+                        <div key={1} className="index-2-carousel-item">
+                            <div style={{
+                                width: '1080px',
+                                height: '1920px',
+                                backgroundImage: 'url(' + require('../../image/index_01_bg-2.png') + ')'
+                            }}></div>
                         </div>
                     </Slider>
                 </div>
