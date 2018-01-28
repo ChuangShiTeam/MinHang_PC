@@ -368,9 +368,9 @@ class Index extends Component {
                         <div key={4} className="index-2-carousel-item" >
                             <div className="index-2-affiant">
                                 <div className="index-2-affiant-title">
-                                    <Button style={{marginRight: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/1.mp3'))}>播放国际歌</Button>
+                                    <Button style={{marginRight: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/11.mp3'))}>播放国际歌</Button>
                                     闵行区党建服务中心领誓人队伍
-                                    <Button style={{marginLeft: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/2.mp3'))}>播放国歌</Button>
+                                    <Button style={{marginLeft: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/22.mp3'))}>播放国歌</Button>
                                 </div>
                                 <div className="index-2-affiant-list">
                                     <ul>
