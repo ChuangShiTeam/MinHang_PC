@@ -88,7 +88,7 @@ class Index extends Component {
     }
 
     handleClickAffiant() {
-        this.slider.slickGoTo(3);
+        this.slider.slickGoTo(2);
     }
 
     handleClickPartyHistory() {
@@ -114,23 +114,32 @@ class Index extends Component {
         });
     }
 
-    handlePlayAffiantMusic(url) {
-        let result = url === this.state.affiantSong;
-        if (result) {
-            this.refs.basicSoundPlayer2.soundCloudAudio.pause();
-        }
+    handlePlayAffiantMusic(party_song_id) {
         this.setState({
-            affiantSong: result ? '' : url
-        }, function () {
-            setTimeout(function () {
-
-                if (result) {
-
-                } else {
-                    this.refs.basicSoundPlayer2.soundCloudAudio.play();
-                }
-            }.bind(this), 0);
-        }.bind(this));
+            is_song_load: true,
+            songVisible: true
+        });
+        http.request({
+            url: '/mobile/minhang/party/song/find',
+            data: {
+                party_song_id: party_song_id
+            },
+            success: function (data) {
+                this.setState({
+                    party_song: data
+                }, function() {
+                    this.handleReloadUser(data.task_id);
+                    setTimeout(function () {
+                        this.refs.basicSoundPlayer.soundCloudAudio.play();
+                    }.bind(this), 500);
+                }.bind(this));
+            }.bind(this),
+            complete: function () {
+                this.setState({
+                    is_song_load: false
+                });
+            }.bind(this)
+        });
     }
 
     handleClickPartySong() {
@@ -173,7 +182,9 @@ class Index extends Component {
     }
 
     handleSongOk() {
-        this.refs.basicSoundPlayer.soundCloudAudio.pause();
+        if (this.refs.basicSoundPlayer) {
+            this.refs.basicSoundPlayer.soundCloudAudio.pause();
+        }
         this.setState({
             party_song: {},
             songVisible: false,
@@ -182,7 +193,9 @@ class Index extends Component {
     }
 
     handleSongCancel() {
-        this.refs.basicSoundPlayer.soundCloudAudio.pause();
+        if (this.refs.basicSoundPlayer) {
+            this.refs.basicSoundPlayer.soundCloudAudio.pause();
+        }
         this.setState({
             party_song: {},
             songVisible: false,
@@ -327,7 +340,7 @@ class Index extends Component {
 
         return (
             <div className="index-2-bg">
-                <div style={{
+                {/*<div style={{
                         position: 'absolute',
                         width: '100%',
                         top: '620px'
@@ -349,11 +362,15 @@ class Index extends Component {
                             ''
 
                     }
-                </div>
+                </div>*/}
                 <div className="con_but">
                     <buttom className="con_but_00" onClick={this.handleClickAffiant.bind(this)}></buttom>
                     <buttom className="con_but_02" onClick={this.handleClickPartySong.bind(this)}></buttom>
                     <buttom className="con_but_01" onClick={this.handleClickPartyHistory.bind(this)}></buttom>
+                </div>
+                <div className="song_but">
+                    <Button className="song_but_00" onClick={this.handlePlayAffiantMusic.bind(this, '11d0ed5c4a3e4af78c3ce9f16d8871bb')}>播放国歌</Button>
+                    <Button className="song_but_01"  onClick={this.handlePlayAffiantMusic.bind(this, '8a802c7618594ee0962ef02f09e6f461')}>播放国际歌</Button>
                 </div>
                 <div className="slef-slick-dots">
                     <Slider ref={c => this.slider = c } {...{
@@ -365,12 +382,24 @@ class Index extends Component {
                         dots: true,
                         afterChange: this.handleChange.bind(this)
                     }}>
-                        <div key={4} className="index-2-carousel-item" >
+                        <div key={1} className="index-2-carousel-item">
+                            <div style={{
+                                width: '1080px',
+                                height: '1920px',
+                                backgroundImage: 'url(' + require('../../image/index_01_bg-4.png') + ')'
+                            }}></div>
+                    </div>
+                        <div key={2} className="index-2-carousel-item" >
+                            <div style={{
+                                width: '1080px',
+                                height: '1920px',
+                                backgroundImage: 'url(' + require('../../image/index_01_bg-1.png') + ')'
+                            }}></div>
+                        </div>
+                        <div key={3} className="index-2-carousel-item" >
                             <div className="index-2-affiant">
                                 <div className="index-2-affiant-title">
-                                    <Button style={{marginRight: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/11.mp3'))}>播放国际歌</Button>
                                     闵行区党建服务中心领誓人队伍
-                                    <Button style={{marginLeft: '20px'}} onClick={this.handlePlayAffiantMusic.bind(this, require('../../video/22.mp3'))}>播放国歌</Button>
                                 </div>
                                 <div className="index-2-affiant-list">
                                     <ul>
@@ -387,21 +416,8 @@ class Index extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div key={0} className="index-2-carousel-item" >
-                            <div style={{
-                                width: '1080px',
-                                height: '1920px',
-                                backgroundImage: 'url(' + require('../../image/index_01_bg-1.png') + ')'
-                            }}></div>
-                        </div>
-                        <div key={3} className="index-2-carousel-item">
-                            <div style={{
-                                width: '1080px',
-                                height: '1920px',
-                                backgroundImage: 'url(' + require('../../image/index_01_bg-4.png') + ')'
-                            }}></div>
-                        </div>
-                        <div key={1} className="index-2-carousel-item">
+
+                        <div key={4} className="index-2-carousel-item">
                             <div style={{
                                 width: '1080px',
                                 height: '1920px',
