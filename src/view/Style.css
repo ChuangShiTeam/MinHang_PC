@@ -334,7 +334,7 @@
 
 .index-4-car {
     position: absolute;
-    left: 500px;
+    left: 10px;
     top: 330px;
     z-index: 4;
     height: 210px;
@@ -347,6 +347,15 @@
 
 .building-popover {
     width: 500px;
+}
+
+.building {
+    position: absolute;
+    top: 138px;
+    width: 336px;
+    height: 276px;
+    z-index: 3;
+    display: block;
 }
 
 .building-0 {
