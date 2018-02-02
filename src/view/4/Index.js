@@ -115,16 +115,6 @@ class Index extends Component {
     render() {
         return (
             <div className="index-4-div">
-                <div className={'index-4-sky ' + (this.state.isPlay ? 'animation-play' : '')}>
-                    <ul>
-                        <li>
-                            <img src={require('../../image/animation-sky.png')} alt=''/>
-                        </li>
-                        <li>
-                            <img src={require('../../image/animation-sky.png')} alt=''/>
-                        </li>
-                    </ul>
-                </div>
                 <div className={'index-4-bg ' + (this.state.isPlay ? 'animation-play' : '')}>
                     <ul>
                         <li>

@@ -257,13 +257,13 @@
 }
 
 .index-4-div {
-    width: 6770px;
+    width: 19875px;
     height: 540px;
     overflow: hidden;
 }
 
 .index-4-bg {
-    width: 6770px;
+    width: 19875px;
     height: 540px;
     margin: 0 auto;
     position: absolute;
@@ -274,12 +274,12 @@
 }
 
 .index-4-bg ul {
-    width: 13540px;
+    width: 19875px;
     height: 540px;
     position: absolute;
     left: 0;
     top: 0;
-    animation: wufeng 70s linear infinite;
+    animation: wufeng 210s linear infinite;
     animation-play-state: paused;
 }
 
@@ -298,12 +298,12 @@
         left: 0;
     }
     100% {
-        left: -6770px;
+        left: -19875px;
     }
 }
 
 .index-4-sky {
-    width: 6770px;
+    width: 19875px;
     height: 540px;
     margin: 0 auto;
     overflow: hidden;
@@ -313,13 +313,13 @@
 }
 
 .index-4-sky ul {
-    width: 13540px;
+    width: 19875px;
     height: 540px;
     position: absolute;
     left: 0;
     top: 0;
     z-index: 1;
-    animation: wufeng 100s linear infinite;
+    animation: wufeng 300s linear infinite;
     animation-play-state: paused;
 }
 
