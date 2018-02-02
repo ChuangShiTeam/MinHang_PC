@@ -108,7 +108,8 @@ class Index extends Component {
         this.setState({
             title: title,
             content: content,
-            index: result
+            index: result,
+            isPlay: this.state.index === index
         });
     }
 

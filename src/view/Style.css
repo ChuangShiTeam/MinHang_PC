@@ -274,18 +274,18 @@
 }
 
 .index-4-bg ul {
-    width: 19875px;
+    width: 39870px;
     height: 540px;
     position: absolute;
-    left: 0;
+    left: 0px;
     top: 0;
     animation: wufeng 210s linear infinite;
     animation-play-state: paused;
 }
 
 .index-4-bg ul li {
-    float: left;
-    position: relative;
+     float: left;
+     position: relative;
 }
 
 .index-4-bg ul li img {
