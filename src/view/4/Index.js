@@ -150,6 +150,9 @@ class Index extends Component {
                             }
                             <img src={require('../../image/animation-backgroud.png')} alt=''/>
                         </li>
+                        <li>
+                            <img src={require('../../image/animation-backgroud.png')} alt=''/>
+                        </li>
                     </ul>
                 </div>
                 <img className="index-4-car" src={require('../../image/animation-car.png')} alt=''
