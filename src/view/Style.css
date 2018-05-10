@@ -257,13 +257,13 @@
 }
 
 .index-4-div {
-    width: 19875px;
+    width: 50580px;
     height: 540px;
     overflow: hidden;
 }
 
 .index-4-bg {
-    width: 19875px;
+    width: 50580px;
     height: 540px;
     margin: 0 auto;
     position: absolute;
@@ -274,7 +274,7 @@
 }
 
 .index-4-bg ul {
-    width: 39870px;
+    width: 101160px;
     height: 540px;
     position: absolute;
     left: 0px;
@@ -298,12 +298,12 @@
         left: 0;
     }
     100% {
-        left: -19875px;
+        left: -50580px;
     }
 }
 
 .index-4-sky {
-    width: 19875px;
+    width: 50580px;
     height: 540px;
     margin: 0 auto;
     overflow: hidden;
@@ -313,7 +313,7 @@
 }
 
 .index-4-sky ul {
-    width: 19875px;
+    width: 50580px;
     height: 540px;
     position: absolute;
     left: 0;
